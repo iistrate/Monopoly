@@ -11,8 +11,12 @@ public class World {
 	
 	
 	public World(){
-		// do stuff
+		// all tiles need to be added here
+		addtile(115, 115, 30, 30, 780, 780);
+		addtile(115, 115, 30, 30, 0, 0);
 	}
+
+	
 
 	// push a new tile object on tilelist
 	public void addtile(int w, int h, int x, int y, int sX, int sY){

@@ -3,6 +3,7 @@
  */
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,10 +14,9 @@ public class Game {
 	private JFrame m_frame;
 	private JPanel m_wrapper;
 	
-	//does not belong here move in world, gui class incomming (world draws game world; gui draws gui)
+	// tilelist created in world constructor
+	World world = new World();
 	
-	Tile tst = new Tile(115, 115, 30, 30, 780, 780);
-	Tile tst2 = new Tile(115, 115, 30, 30, 0, 0);
 	
 	//constructor and initialization
 	Game(int w, int h, String name) {
@@ -38,9 +38,7 @@ public class Game {
 			m_frame.add(m_wrapper);
 			m_wrapper.setBackground(Color.black);
 			//we add the tiles like this
-			m_wrapper.add(tst.getPanel());
-			m_wrapper.add(tst2.getPanel());
-			m_brunning = false;
+			setuptiles();
 		}
 		while (m_brunning);
 	}
@@ -48,5 +46,20 @@ public class Game {
 	void quit() {
 		m_frame.dispose();
 		m_brunning = false;
+	}
+
+	// add tiles from tilelist in world.java to current frame
+	void setuptiles(){
+		// temp tile object
+		Tile temptile = null;
+		// temp tilelist 
+		ArrayList<Tile> tilelist = new ArrayList<Tile>();
+		tilelist = world.getTilelist();
+		for (int i = 0; i < tilelist.size(); i++){
+			//get current tile from list
+			temptile = tilelist.get(i);
+			//add tile to frame
+			m_wrapper.add(temptile.getPanel());
+		}
 	}
 }
