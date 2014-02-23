@@ -2,7 +2,6 @@
  * Contains Frame; Game Loop
  */
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JFrame;
@@ -14,8 +13,10 @@ public class Game {
 	private JFrame m_frame;
 	private JPanel m_wrapper;
 	
-	//does not belong here
-	private Tile tst = new Tile(115, 115, 30, 30, 780, 780);
+	//does not belong here move in world, gui class incomming (world draws game world; gui draws gui)
+	
+	Tile tst = new Tile(115, 115, 30, 30, 780, 780);
+	Tile tst2 = new Tile(115, 115, 30, 30, 0, 0);
 	
 	//constructor and initialization
 	Game(int w, int h, String name) {
@@ -25,7 +26,7 @@ public class Game {
 		m_frame.setVisible(true);
 		m_frame.setName(name);
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		m_wrapper = new JPanel(new BorderLayout());
+		m_wrapper = new JPanel();
 	}
 	//condition for game loop set to true
 	void init() {
@@ -36,7 +37,9 @@ public class Game {
 		do {
 			m_frame.add(m_wrapper);
 			m_wrapper.setBackground(Color.black);
+			//we add the tiles like this
 			m_wrapper.add(tst.getPanel());
+			m_wrapper.add(tst2.getPanel());
 			m_brunning = false;
 		}
 		while (m_brunning);
