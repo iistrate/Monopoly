@@ -6,26 +6,30 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class World {
+	//arraylist for tile objects
 	private static ArrayList<Tile> tilelist = new ArrayList<Tile>();
 	
 	
 	public World(){
-		System.out.println("Ioans a monkey");
+		// do stuff
 	}
 
+	// push a new tile object on tilelist
 	public void addtile(int w, int h, int x, int y, int sX, int sY){
 		tilelist.add(new Tile(w, h, x, y, sX, sY));
 	}
 	
+	// return the entire arraylist, good if another class needs the array
 	public static ArrayList<Tile> getTilelist() {
 		return tilelist;
 	}
 
+	// to set the entire arraylist
 	public static void setTilelist(ArrayList<Tile> tilelist) {
 		World.tilelist = tilelist;
 	}
 	
-	// Non-Database load and save, To: Ioan From: Jay    :P  HAH-HAH
+	//Load tilelist from tilelist.dat 
 	@SuppressWarnings("unchecked")
 	public void load() throws IOException, ClassNotFoundException{
         FileInputStream prein = new FileInputStream("tilelist.dat");
@@ -34,6 +38,7 @@ public class World {
         in.close();
     }
 	
+	// save tile list to tilelist.dat
 	public void save() throws IOException  {
 	    FileOutputStream fos = new FileOutputStream("tilelist.dat");
 	    ObjectOutputStream oos = new ObjectOutputStream(fos);   
