@@ -1,3 +1,7 @@
+/*
+ * Magic
+ */
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,22 +23,28 @@ public class CustomImage {
 	//animated
 	boolean m_animated;
 	
-	private BufferedImage m_image;
+	//loads big image
 	private BufferedImage m_boardSprites;
+	//loads small image
+	private BufferedImage m_image;
 	
 	CustomImage(String filename, int w, int h, int x, int y) {
+		//default is not animated
+		m_animated = false;
 		try {
+			//set big image
 			m_boardSprites = ImageIO.read(new File (filename));
+			//get sprite
 			m_image = m_boardSprites.getSubimage(x, y, w, h);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
 	}
-	
+	//return image
 	public BufferedImage getImage() {
 		return m_image;
 	}
-	
+	//load image, setter
 	public void load(String fname, int sX, int sY, int x, int y, int w, int h) {
 		m_filename = fname;
 		m_spriteX = sX;
@@ -44,6 +54,7 @@ public class CustomImage {
 		m_width = w;
 		m_height = h;
 	}
+	//Getters
 	public String getFilename() {
 		return m_filename;
 	}
@@ -64,5 +75,8 @@ public class CustomImage {
 	}
 	public int getHeight() {
 		return m_height;
+	}
+	public boolean isAnimated() {
+		return m_animated;
 	}
 }
