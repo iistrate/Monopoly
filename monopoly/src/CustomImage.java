@@ -1,5 +1,5 @@
 /*
- * Magic
+ so  * Magic
  */
 
 import java.awt.image.BufferedImage;
