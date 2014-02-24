@@ -10,7 +10,6 @@ public class World {
 	private static ArrayList<Tile> tilelist = new ArrayList<Tile>();
 
 	public World(){		// all tiles need to be added here
-		int tx = 0;
 		//add four corners
 		addtile(115, 115, 0, 0, 0, 0); // free parking 
 		addtile(115, 115, 30, 30, 781, 781 ); // go 
