@@ -74,4 +74,19 @@ public class Game {
 			m_board.add(temptile.getPanel(), m_constraints);
 		}
 	}
+	// add tiles from tilelist in world.java to current frame
+		void setupplayers(){
+			// temp Player object
+			Player tempplayer = null;
+			// temp tilelist 
+			ArrayList<Player> playerlist = new ArrayList<Player>();
+			playerlist = world.getPlayerlist();
+			for (int i = 0; i < playerlist.size(); i++){
+				//get current tile from list
+				tempplayer = playerlist.get(i);
+				m_constraints.gridx = tempplayer.getX();
+				m_constraints.gridy = tempplayer.getY();
+				m_board.add(tempplayer.getPanel(), m_constraints);
+			}
+		}
 }
