@@ -39,7 +39,7 @@ public class World {
 		
 		//Player stuff
 		addplayer(38, 52, 0, 0, 0, 0 );
-		addplayer(38, 52, 1, 0, 38, 0 );
+		addplayer(38, 52, 9, 0, 38, 0 );
 	}
 
 	//push a new player object on the playerlist
@@ -53,11 +53,11 @@ public class World {
 		tilelist.add(new Tile(w, h, x, y, sX, sY));
 	}
 	// return the entire playerlist, good if another class needs the array
-		public static ArrayList<Player> getPlayerlist() {
+		public ArrayList<Player> getPlayerlist() {
 			return playerlist;
 		}
 	// return the entire arraylist, good if another class needs the array
-	public static ArrayList<Tile> getTilelist() {
+	public ArrayList<Tile> getTilelist() {
 		return tilelist;
 	}
 

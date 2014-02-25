@@ -20,9 +20,9 @@ public class Game {
 	private JFrame m_frame;
 	private JPanel m_wrapper;
 	private JPanel m_board;
-	private JLayeredPane m_topLayer;
+	private JPanel m_topLayer;
 	private GridBagConstraints m_constraints;
-	
+	private Dice dice;
 	// tile list created in world constructor
 	World world = new World();
 	
@@ -30,6 +30,12 @@ public class Game {
 	//constructor and initialization
 	Game(int w, int h, String name) {
 		m_brunning = false;
+		try {
+			dice = new Dice();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		m_frame = new JFrame();
 		m_frame.setSize(w, h);
 		m_frame.setVisible(true);
@@ -37,7 +43,7 @@ public class Game {
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m_wrapper = new JPanel();
 		m_board = new JPanel(new GridBagLayout());
-		m_topLayer = new JLayeredPane();
+		m_topLayer = new JPanel();
 		m_constraints = new GridBagConstraints();
 		m_constraints.fill = GridBagConstraints.BOTH;
 	}
@@ -52,11 +58,12 @@ public class Game {
 		m_board.setPreferredSize(new Dimension(900, 897));
 		m_board.setVisible(true);
 		m_wrapper.add(m_board);
-		m_board.add(m_topLayer);
+		m_wrapper.add(m_topLayer);
+		m_topLayer.add(dice.returnPanel());
 		setupplayers();
 		setuptiles();
 		do {
-
+			
 		}
 		while (m_brunning);
 	}
@@ -80,7 +87,7 @@ public class Game {
 			m_constraints.gridy = temptile.getY();
 			if (i == 40) {
 				m_constraints.gridheight = 9;
-				m_constraints.gridwidth = 9;				
+				m_constraints.gridwidth = 9;	
 			}
 			m_board.add(temptile.getPanel(), m_constraints);
 		}

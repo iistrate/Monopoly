@@ -2,7 +2,6 @@
  * Tile as a game object; loads image to label and label to panel
  */
 import java.awt.Dimension;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -20,7 +19,10 @@ public class Tile extends GameObject {
 		//set panel size
 		m_panel.setPreferredSize(new Dimension(w, h));
 		//adds image to panel
-		m_panel.add(new JLabel(new ImageIcon(m_image.getImage())));
+		ImageIcon img = new ImageIcon(m_image.getImage());
+		JLabel label = new JLabel(img);
+		img.getIconHeight();
+		m_panel.add(label);
 		m_panel.setOpaque(false);
 	}
 }
