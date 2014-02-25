@@ -50,6 +50,7 @@ public class Game {
 			m_wrapper.add(m_board);
 			//we add the tiles like this
 			setuptiles();
+			setupplayers();
 		}
 		while (m_brunning);
 	}
