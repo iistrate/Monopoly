@@ -18,9 +18,10 @@ public class Game {
 	private JFrame m_frame;
 	private JPanel m_wrapper;
 	private JPanel m_board;
+//	private JPanel m_center;
 	private GridBagConstraints m_constraints;
 	
-	// tilelist created in world constructor
+	// tile list created in world constructor
 	World world = new World();
 	
 	
@@ -43,14 +44,14 @@ public class Game {
 	}
 	//start game loop
 	void run() {
+		m_frame.add(m_wrapper);
+		m_wrapper.setBackground(Color.black);
+		m_board.setPreferredSize(new Dimension(900, 897));
+		m_wrapper.add(m_board);
+		setuptiles();
+		setupplayers();
 		do {
-			m_frame.add(m_wrapper);
-			m_wrapper.setBackground(Color.black);
-			m_board.setPreferredSize(new Dimension(900, 897));
-			m_wrapper.add(m_board);
-			//we add the tiles like this
-			setuptiles();
-			setupplayers();
+
 		}
 		while (m_brunning);
 	}
@@ -72,14 +73,18 @@ public class Game {
 			temptile = tilelist.get(i);
 			m_constraints.gridx = temptile.getX();
 			m_constraints.gridy = temptile.getY();
+			if (i == 40) {
+				m_constraints.gridheight = 9;
+				m_constraints.gridwidth = 9;				
+			}
 			m_board.add(temptile.getPanel(), m_constraints);
 		}
 	}
-	// add players from playerlist in world.java to current frame
-		void setupplayers(){
+	// add players from player list in world.java to current frame
+		void setupplayers() {
 			// temp Player object
 			Player tempplayer = null;
-			// temp playerlist
+			// temp player list
 			ArrayList<Player> playerlist = new ArrayList<Player>();
 			playerlist = world.getPlayerlist();
 			for (int i = 0; i < playerlist.size(); i++){

@@ -34,9 +34,12 @@ public class World {
 			tempy = tempy + 73;
 		}
 		
+		//add center tile
+		addtile(657, 657, 1, 1, 121, 119);
+		
 		//Player stuff
-		addplayer(37, 38, 30, 30, 6 ,8 );
-
+		addplayer(38, 52, 0, 0, 0, 0 );
+		addplayer(38, 52, 1, 0, 38, 0 );
 	}
 
 	//push a new player object on the playerlist
