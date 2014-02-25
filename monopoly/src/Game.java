@@ -7,9 +7,11 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class Game {
@@ -18,7 +20,7 @@ public class Game {
 	private JFrame m_frame;
 	private JPanel m_wrapper;
 	private JPanel m_board;
-//	private JPanel m_center;
+	private JLayeredPane m_topLayer;
 	private GridBagConstraints m_constraints;
 	
 	// tile list created in world constructor
@@ -35,6 +37,7 @@ public class Game {
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m_wrapper = new JPanel();
 		m_board = new JPanel(new GridBagLayout());
+		m_topLayer = new JLayeredPane();
 		m_constraints = new GridBagConstraints();
 		m_constraints.fill = GridBagConstraints.BOTH;
 	}
@@ -47,9 +50,11 @@ public class Game {
 		m_frame.add(m_wrapper);
 		m_wrapper.setBackground(Color.black);
 		m_board.setPreferredSize(new Dimension(900, 897));
+		m_board.setVisible(true);
 		m_wrapper.add(m_board);
-		setuptiles();
+		m_board.add(m_topLayer);
 		setupplayers();
+		setuptiles();
 		do {
 
 		}
@@ -90,8 +95,11 @@ public class Game {
 			for (int i = 0; i < playerlist.size(); i++){
 				//get current tile from list
 				tempplayer = playerlist.get(i);
+				tempplayer.getPanel().setVisible(true);
 				m_constraints.gridx = tempplayer.getX();
 				m_constraints.gridy = tempplayer.getY();
+				m_constraints.gridheight = 1;
+				m_constraints.gridwidth = 1;	
 				m_board.add(tempplayer.getPanel(), m_constraints);
 			}
 		}
