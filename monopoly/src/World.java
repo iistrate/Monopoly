@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class World {
 	// arraylist for tile objects
 	private static ArrayList<Tile> tilelist = new ArrayList<Tile>();
+	private static ArrayList<Player> playerlist = new ArrayList<Player>();
 
 	public World(){		// all tiles need to be added here
-		int tx = 0;
 		//add four corners
 		addtile(115, 115, 0, 0, 0, 0); // free parking 
 		addtile(115, 115, 30, 30, 781, 781 ); // go 
@@ -29,18 +29,30 @@ public class World {
 		// SOMETHING IS CREATING A WHITE SPACE AT THE TOP OF THE SPRITE HELP!
 		int tempy = 119;
 		for (int i = 0; i < 9; i++){
-			addtile(115, 73, 0, i+1, 0, tempy); // left proerties
+			addtile(115, 73, 0, i+1, 0, tempy); // left properties
 			addtile(115, 73, 30, i+1, 780, tempy); // right properties
 			tempy = tempy + 73;
 		}
+		
+		//Player stuff
+		addplayer(37, 38, 30, 30, 6 ,8 );
 
 	}
 
+	//push a new player object on the playerlist
+	public void addplayer(int w, int h, int x, int y, int sX, int sY) {
+		playerlist.add(new Player(w, h, x, y, sX, sY));
+	}
+
+	
 	// push a new tile object on tilelist
 	public void addtile(int w, int h, int x, int y, int sX, int sY) {
 		tilelist.add(new Tile(w, h, x, y, sX, sY));
 	}
-
+	// return the entire playerlist, good if another class needs the array
+		public static ArrayList<Player> getPlayerlist() {
+			return playerlist;
+		}
 	// return the entire arraylist, good if another class needs the array
 	public static ArrayList<Tile> getTilelist() {
 		return tilelist;
