@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,10 +14,11 @@ public class Player extends GameObject {
 		m_y = y;
 		m_panel = new JPanel();
 		// creates image
-		m_image = new CustomImage("assets/sprites-player.jpg", w, h, sX, sY);
+		m_image = new CustomImage("assets/sprites-player.png", w, h, sX, sY);
 		// set panel size
 		m_panel.setPreferredSize(new Dimension(w, h));
 		// adds image to panel
 		m_panel.add(new JLabel(new ImageIcon(m_image.getImage())));
+		m_panel.setOpaque(false);
 	}
 }

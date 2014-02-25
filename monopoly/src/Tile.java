@@ -21,5 +21,6 @@ public class Tile extends GameObject {
 		m_panel.setPreferredSize(new Dimension(w, h));
 		//adds image to panel
 		m_panel.add(new JLabel(new ImageIcon(m_image.getImage())));
+		m_panel.setOpaque(false);
 	}
 }
