@@ -7,6 +7,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Random;
 public class Dice{
 	// =============== VARIABLES =================================
 //	private JFrame d_frame;
@@ -41,7 +42,6 @@ public class Dice{
 		// ----------------------------------------------
 		//creates image
 		d_image = new CustomImage("assets/diceSprite.png", 189, 199,0, 0);
-		
 		//set panel size
 		d_panel.setPreferredSize(new Dimension(189, 199));
 		
@@ -55,8 +55,9 @@ public class Dice{
 		d_button.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 				  //
-				  DiceThread temp =  new DiceThread(diceLabel,d_button);
-				  m_irandom = temp.getRandom();
+				  new DiceThread(diceLabel,d_button);
+				  Random rd=new Random();
+				  m_irandom = rd.nextInt(6)+1;
 				  m_bupdated = true;
 				  d_button.setEnabled(false);
 				  } 

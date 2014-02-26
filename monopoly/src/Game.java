@@ -26,6 +26,7 @@ public class Game {
 	// tile list created in world constructor
 	World world = new World();
 	boolean m_bupdated;
+	int m_imovement;
 	
 	//constructor and initialization
 	Game(int w, int h, String name) {
@@ -47,6 +48,7 @@ public class Game {
 		m_constraints = new GridBagConstraints();
 		m_constraints.fill = GridBagConstraints.BOTH;
 		m_bupdated = false;
+		m_imovement = 0;
 	}
 	//condition for game loop set to true
 	void init() {
@@ -69,9 +71,11 @@ public class Game {
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
 				//do movement would go here
-				System.out.println(dice.getRandom());
+				m_imovement = dice.getRandom();
+				
+				//when movement is done set false
+				dice.setIsUpdated(false);
 			}
-			dice.setIsUpdated(false);
 		}
 		while (m_brunning);
 	}
