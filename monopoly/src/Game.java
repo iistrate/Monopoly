@@ -58,11 +58,13 @@ public class Game {
 		m_wrapper.setBackground(Color.black);
 		m_board.setPreferredSize(new Dimension(900, 897));
 		m_board.setVisible(true);
+		m_board.setBackground(Color.black);
 		m_wrapper.add(m_board);
 		m_wrapper.add(m_topLayer);
 		m_topLayer.add(dice.returnPanel());
 		setupplayers();
 		setuptiles();
+		m_frame.revalidate();
 		do {
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
@@ -91,11 +93,14 @@ public class Game {
 			temptile = tilelist.get(i);
 			m_constraints.gridx = temptile.getX();
 			m_constraints.gridy = temptile.getY();
+			//ugly fix for ugly margin; treated symptom not causes
+			m_constraints.insets = new Insets(-5, 0, 0, 0);
 			if (i == 40) {
 				m_constraints.gridheight = 9;
 				m_constraints.gridwidth = 9;	
 			}
 			m_board.add(temptile.getPanel(), m_constraints);
+			m_board.validate();
 		}
 	}
 	// add players from player list in world.java to current frame
@@ -114,6 +119,7 @@ public class Game {
 				m_constraints.gridheight = 1;
 				m_constraints.gridwidth = 1;	
 				m_board.add(tempplayer.getPanel(), m_constraints);
+				m_board.validate();
 			}
 		}
 }

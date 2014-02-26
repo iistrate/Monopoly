@@ -35,7 +35,7 @@ public class World {
 		}
 		
 		//add center tile
-		addtile(657, 657, 1, 1, 121, 119);
+		addtile(657, 622, 1, 1, 121, 119);
 		
 		//Player stuff
 		addplayer(38, 52, 0, 0, 0, 0 );
