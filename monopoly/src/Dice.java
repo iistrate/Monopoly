@@ -17,6 +17,10 @@ public class Dice{
 	private JButton d_button;
 	public final static int d_Delay = 100;
 	Thread d_thread;
+	
+	private int m_irandom;
+	boolean m_bupdated;
+	
 	// =============================================================
 	
 	// ======== CONSTRUCTOR ================================
@@ -51,7 +55,9 @@ public class Dice{
 		d_button.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 				  //
-				  new DiceThread(diceLabel,d_button);
+				  DiceThread temp =  new DiceThread(diceLabel,d_button);
+				  m_irandom = temp.getRandom();
+				  m_bupdated = true;
 				  d_button.setEnabled(false);
 				  } 
 				} );
@@ -71,6 +77,15 @@ public class Dice{
 	}
 public JPanel returnPanel() {
 	return m_wrapper;
+}
+public int getRandom() {
+	return m_irandom;
+}
+public boolean isUpdated() {
+	return m_bupdated;
+}
+public void setIsUpdated(boolean b) {
+	m_bupdated = b; 
 }
 // ======================== MAIN ======================================
 public static void main(String[] args) throws InterruptedException {
