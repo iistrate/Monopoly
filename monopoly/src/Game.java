@@ -55,7 +55,7 @@ public class Game {
 		m_bupdated = false;
 		m_imovement = 0;
 		m_iplayerNr = 0;
-		m_iturn = 0;
+		m_iturn = 1;
 	}
 	//condition for game loop set to true
 	void init() {
@@ -82,7 +82,7 @@ public class Game {
 				world.movePlayer(m_imovement, m_iturn);
 				//when movement is done set false
 				dice.setIsUpdated(false);
-				if (m_iturn <= m_iplayerNr) {
+				if (m_iturn < m_iplayerNr) {
 					//increase turn
 					m_iturn++;
 				}
