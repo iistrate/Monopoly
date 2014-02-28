@@ -25,6 +25,8 @@ public class Game {
 	private Dice dice;
 	private boolean m_bupdated;
 	private int m_imovement;
+	private int m_iplayerNr;
+	private int m_iturn;
 	
 	// tile list created in world constructor
 	World world = new World();
@@ -51,6 +53,8 @@ public class Game {
 		m_constraints.fill = GridBagConstraints.BOTH;
 		m_bupdated = false;
 		m_imovement = 0;
+		m_iplayerNr = 0;
+		m_iturn = 0;
 	}
 	//condition for game loop set to true
 	void init() {
@@ -77,6 +81,8 @@ public class Game {
 				world.movePlayer(m_imovement);
 				//when movement is done set false
 				dice.setIsUpdated(false);
+				//increase turn
+				m_iturn++;
 			}
 		}
 		while (m_brunning);
@@ -116,6 +122,8 @@ public class Game {
 			// temp player list
 			ArrayList<Player> playerlist = new ArrayList<Player>();
 			playerlist = world.getPlayerlist();
+			//count nr of players
+			m_iplayerNr = playerlist.size();
 			for (int i = 0; i < playerlist.size(); i++){
 				//get current tile from list
 				tempplayer = playerlist.get(i);
