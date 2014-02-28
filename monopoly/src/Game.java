@@ -27,6 +27,7 @@ public class Game {
 	private int m_imovement;
 	private int m_iplayerNr;
 	private int m_iturn;
+	private int m_iplayerTurn;
 	
 	// tile list created in world constructor
 	World world = new World();
@@ -78,11 +79,16 @@ public class Game {
 			if (m_bupdated) {
 				//do movement would go here
 				m_imovement = dice.getRandom();
-				world.movePlayer(m_imovement);
+				world.movePlayer(m_imovement, m_iturn);
 				//when movement is done set false
 				dice.setIsUpdated(false);
-				//increase turn
-				m_iturn++;
+				if (m_iturn <= m_iplayerNr) {
+					//increase turn
+					m_iturn++;
+				}
+				else {
+					m_iturn = 1;
+				}
 			}
 		}
 		while (m_brunning);

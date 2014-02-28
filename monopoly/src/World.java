@@ -66,7 +66,7 @@ public class World {
 		World.tilelist = tilelist;
 	}
 	
-	public void movePlayer(int dice) {
+	public void movePlayer(int dice, int playerToMove) {
 		//System.out.println(x);
 	}
 
