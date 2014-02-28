@@ -23,10 +23,12 @@ public class Game {
 	private JPanel m_topLayer;
 	private GridBagConstraints m_constraints;
 	private Dice dice;
+	private boolean m_bupdated;
+	private int m_imovement;
+	
 	// tile list created in world constructor
 	World world = new World();
-	boolean m_bupdated;
-	int m_imovement;
+
 	
 	//constructor and initialization
 	Game(int w, int h, String name) {
@@ -72,7 +74,7 @@ public class Game {
 			if (m_bupdated) {
 				//do movement would go here
 				m_imovement = dice.getRandom();
-				
+				world.movePlayer(m_imovement);
 				//when movement is done set false
 				dice.setIsUpdated(false);
 			}

@@ -65,6 +65,10 @@ public class World {
 	public static void setTilelist(ArrayList<Tile> tilelist) {
 		World.tilelist = tilelist;
 	}
+	
+	public void movePlayer(int dice) {
+		//System.out.println(x);
+	}
 
 	// Load tilelist from tilelist.dat
 	@SuppressWarnings("unchecked")
