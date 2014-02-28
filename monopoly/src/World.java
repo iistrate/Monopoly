@@ -13,15 +13,15 @@ public class World {
 	public World() { // all tiles need to be added here
 		// add four corners
 		addtile(115, 115, 0, 0, 0, 0); // free parking
-		addtile(115, 115, 30, 30, 781, 781); // go
-		addtile(115, 115, 30, 0, 0, 781); // jail
-		addtile(115, 115, 0, 30, 781, 0); // go to jail
+		addtile(115, 115, 10, 10, 781, 781); // go
+		addtile(115, 115, 10, 0, 0, 781); // jail
+		addtile(115, 115, 0, 10, 781, 0); // go to jail
 
 		// add top and bottom row of board tiles
 		int tempx = 121;
 		for (int i = 0; i < 9; i++) {
 			addtile(73, 115, i + 1, 0, tempx, 0); // top properties
-			addtile(73, 115, i + 1, 30, tempx, 781); // bottom properties
+			addtile(73, 115, i + 1, 10, tempx, 781); // bottom properties
 			tempx = tempx + 73;
 		}
 
@@ -29,7 +29,7 @@ public class World {
 		int tempy = 119;
 		for (int i = 0; i < 9; i++) {
 			addtile(115, 73, 0, i + 1, 0, tempy); // left properties
-			addtile(115, 73, 30, i + 1, 780, tempy); // right properties
+			addtile(115, 73, 10, i + 1, 780, tempy); // right properties
 			tempy = tempy + 73;
 		}
 
@@ -37,7 +37,7 @@ public class World {
 		addtile(657, 622, 1, 1, 121, 119);
 
 		// Player stuff
-		addplayer(38, 52, 0, 0, 0, 0);
+		addplayer(38, 52, 10, 0, 0, 0);
 		// addplayer(38, 52, 9, 0, 38, 0 );
 	}
 
