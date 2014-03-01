@@ -73,7 +73,6 @@ public class Game {
 		m_topLayer.add(dice.returnPanel());
 		setupplayers();
 		setuptiles();
-		m_frame.revalidate();
 		do {
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
@@ -82,6 +81,14 @@ public class Game {
 				world.movePlayer(m_imovement, m_iturn);
 				//when movement is done set false
 				dice.setIsUpdated(false);
+				//clear board
+				m_board.removeAll();
+				m_board.updateUI();
+				//redraw board
+				setupplayers();
+				setuptiles();
+				m_frame.revalidate();
+				//increment player turn
 				if (m_iturn < m_iplayerNr) {
 					//increase turn
 					m_iturn++;
