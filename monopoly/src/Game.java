@@ -78,6 +78,8 @@ public class Game {
 			if (m_bupdated) {
 				//do movement would go here
 				m_imovement = dice.getRandom();
+				System.out.println(m_imovement);
+				// m_imovement = dice.getRandom2();
 				world.movePlayer(m_imovement, m_iturn);
 				//when movement is done set false
 				dice.setIsUpdated(false);

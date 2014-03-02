@@ -20,17 +20,17 @@ public class DiceThread extends Thread {
 	private int d_Delay; // Delay between animation
 	//================================
 	
-	   DiceThread(JLabel jl, JButton jb) {
+	   DiceThread(JLabel jl, JButton jb,int j) {
 		      super("Dice Thread");
 		      diceLabel = jl;
 		      d_button = jb;
 		      d_Delay = 40;
+		      d_random = j;
 		      start(); // Start the thread
 		   }
  public void run() {
 	 // ======= Generating random number ===============
-			Random rd=new Random();
-	        d_random=rd.nextInt(6)+1;
+	    //    System.out.println("IN dice thread = "+  d_random);
 	 // =================================================
 	        
 	 // Creating Animation ==============================      
@@ -104,7 +104,9 @@ public class DiceThread extends Thread {
  	}
  // === Getter for random number generator ===================
    public int getRandom(){
-	   return d_random;			   
+	  // System.out.println("IN dice function = "+  d_random);
+	   return d_random;	
+	  
    }
  //============================================================
 	  
