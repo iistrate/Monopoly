@@ -84,6 +84,9 @@ public class Game {
 				if (!world.isplayerinjail(m_iturn)
 						|| world.isplayerinjail(m_iturn) && dice.isDouble())
 					world.movePlayer(m_imovement, m_iturn);
+				if (world.isplayerinjail(m_iturn) && dice.isDouble()){
+					world.playerleavejail(m_iturn);
+				}
 				// when movement is done set false
 				dice.setIsUpdated(false);
 				// clear board

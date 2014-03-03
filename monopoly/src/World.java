@@ -78,6 +78,20 @@ public class World {
 		return tmpPlayer.isM_binjail();
 	}
 	
+	public void playerleavejail(int inplayer){
+		inplayer = inplayer - 1;
+		Player tmpPlayer = null;
+		// get correct player from list
+		for (int i = 0; i < playerlist.size(); i++) {
+			if (i == inplayer) {
+				tmpPlayer = playerlist.get(i);
+				tmpPlayer.setM_binjail(false);
+				playerlist.set(i, tmpPlayer);				
+			}
+		}
+		
+	}
+	
 	public void movePlayer(int dice, int playerToMove) {
 		int plr2move = playerToMove - 1;
 		int plrPosX;
