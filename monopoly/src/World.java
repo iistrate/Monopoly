@@ -66,6 +66,18 @@ public class World {
 		World.tilelist = tilelist;
 	}
 
+	public boolean isplayerinjail(int inplayer){
+		inplayer = inplayer - 1;
+		Player tmpPlayer = null;
+		// get correct player from list
+		for (int i = 0; i < playerlist.size(); i++) {
+			if (i == inplayer) {
+				tmpPlayer = playerlist.get(i);
+			}
+		}
+		return tmpPlayer.isM_binjail();
+	}
+	
 	public void movePlayer(int dice, int playerToMove) {
 		int plr2move = playerToMove - 1;
 		int plrPosX;
@@ -95,16 +107,27 @@ public class World {
 			else if(plrPosX == i && plrPosY == 0) // 31 - 1
 				currentsquare = 31 + i;	
 			else
-				System.out.println("Something went wrong");
+				System.out.println("");
 			tmpcnt++;
 		}
 		
 		// we know where we are, where are we going?
 		gotosquare = currentsquare + dice;
 		
-		if (gotosquare > 40) // translate numbers above 40
+		if (gotosquare > 40){ // translate numbers above 40
 			gotosquare = gotosquare - 40;
+			tmpPlayer.setM_iplayercash(500); //$500 for passing go
+		}
 		
+		//check if player planded on tax / jail / etc.
+		if (gotosquare == 5) // -$200 income tax
+			tmpPlayer.setM_iplayercash(-200);
+		if (gotosquare == 39) // -$200 super tax
+			tmpPlayer.setM_iplayercash(-200);
+		if (gotosquare == 31){
+			gotosquare = 11;
+			tmpPlayer.setM_binjail(true);
+		}
 		
 		
 		// go to needed square on board
@@ -125,7 +148,7 @@ public class World {
 			tmpPlayer.setY(gotosquare - 31);
 		}
 		else 
-			System.out.println("FUCK");
+			System.out.println("");
 		
 		// insert player back into playerlist
 		for (int i = 0; i < playerlist.size(); i++) {

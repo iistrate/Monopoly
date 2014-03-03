@@ -15,7 +15,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class Game {
-	//member declarations
+	// member declarations
 	private boolean m_brunning;
 	private JFrame m_frame;
 	private JPanel m_wrapper;
@@ -28,12 +28,11 @@ public class Game {
 	private int m_iplayerNr;
 	private int m_iturn;
 	private int m_iplayerTurn;
-	
+
 	// tile list created in world constructor
 	World world = new World();
 
-	
-	//constructor and initialization
+	// constructor and initialization
 	Game(int w, int h, String name) {
 		m_brunning = false;
 		try {
@@ -57,11 +56,13 @@ public class Game {
 		m_iplayerNr = 0;
 		m_iturn = 1;
 	}
-	//condition for game loop set to true
+
+	// condition for game loop set to true
 	void init() {
 		m_brunning = true;
 	}
-	//start game loop
+
+	// start game loop
 	void run() {
 		m_frame.add(m_wrapper);
 		m_wrapper.setBackground(Color.black);
@@ -76,79 +77,81 @@ public class Game {
 		do {
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
-				//do movement would go here
+				// do movement would go here
 				m_imovement = dice.getRandom();
-				System.out.println(m_imovement);
-				// m_imovement = dice.getRandom2();
-				world.movePlayer(m_imovement, m_iturn);
-				//when movement is done set false
+				// if player isn't in jail or player is in jail and rolls
+				// doubles go ahead and move player
+				if (!world.isplayerinjail(m_iturn)
+						|| world.isplayerinjail(m_iturn) && dice.isDouble())
+					world.movePlayer(m_imovement, m_iturn);
+				// when movement is done set false
 				dice.setIsUpdated(false);
-				//clear board
+				// clear board
 				m_board.removeAll();
 				m_board.updateUI();
-				//redraw board
+				// redraw board
 				setupplayers();
 				setuptiles();
 				m_frame.revalidate();
-				//increment player turn
+				// increment player turn
 				if (m_iturn < m_iplayerNr) {
-					//increase turn
+					// increase turn
 					m_iturn++;
-				}
-				else {
+				} else {
 					m_iturn = 1;
 				}
 			}
-		}
-		while (m_brunning);
+		} while (m_brunning);
 	}
-	//stops game loop and clears resources
+
+	// stops game loop and clears resources
 	void quit() {
 		m_frame.dispose();
 		m_brunning = false;
 	}
 
 	// add tiles from tilelist in world.java to current frame
-	void setuptiles(){
+	void setuptiles() {
 		// temp tile object
 		Tile temptile = null;
-		// temp tilelist 
+		// temp tilelist
 		ArrayList<Tile> tilelist = new ArrayList<Tile>();
 		tilelist = world.getTilelist();
-		for (int i = 0; i < tilelist.size(); i++){
-			//get current tile from list
+		for (int i = 0; i < tilelist.size(); i++) {
+			// get current tile from list
 			temptile = tilelist.get(i);
 			m_constraints.gridx = temptile.getX();
 			m_constraints.gridy = temptile.getY();
-			//ugly fix for ugly margin; treated symptom not causes
+			// ugly fix for ugly margin; treated symptom not causes
 			m_constraints.insets = new Insets(-5, 0, 0, 0);
 			if (i == 40) {
 				m_constraints.gridheight = 9;
-				m_constraints.gridwidth = 9;	
+				m_constraints.gridwidth = 9;
 			}
 			m_board.add(temptile.getPanel(), m_constraints);
 			m_board.validate();
 		}
 	}
+
 	// add players from player list in world.java to current frame
-		void setupplayers() {
-			// temp Player object
-			Player tempplayer = null;
-			// temp player list
-			ArrayList<Player> playerlist = new ArrayList<Player>();
-			playerlist = world.getPlayerlist();
-			//count nr of players
-			m_iplayerNr = playerlist.size();
-			for (int i = 0; i < playerlist.size(); i++){
-				//get current tile from list
-				tempplayer = playerlist.get(i);
-				tempplayer.getPanel().setVisible(true);
-				m_constraints.gridx = tempplayer.getX();
-				m_constraints.gridy = tempplayer.getY();
-				m_constraints.gridheight = 1;
-				m_constraints.gridwidth = 1;	
-				m_board.add(tempplayer.getPanel(), m_constraints);
-				m_board.validate();
-			}
+	void setupplayers() {
+		// temp Player object
+		Player tempplayer = null;
+		// temp player list
+		ArrayList<Player> playerlist = new ArrayList<Player>();
+		playerlist = world.getPlayerlist();
+		// count nr of players
+		m_iplayerNr = playerlist.size();
+		for (int i = 0; i < playerlist.size(); i++) {
+			// get current tile from list
+			tempplayer = playerlist.get(i);
+			tempplayer.getPanel().setVisible(true);
+			m_constraints.gridx = tempplayer.getX();
+			m_constraints.gridy = tempplayer.getY();
+			m_constraints.gridheight = 1;
+			m_constraints.gridwidth = 1;
+			m_board.add(tempplayer.getPanel(), m_constraints);
+			m_board.validate();
 		}
+	}
 }
