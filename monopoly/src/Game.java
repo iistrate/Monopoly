@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class Game {
 	// member declarations
@@ -182,10 +183,12 @@ public class Game {
 		m_frame.revalidate();		
 	}
 	public void buildGUI() {
-		m_topLayer.setPreferredSize(new Dimension(300, 890));
+		m_topLayer.setPreferredSize(new Dimension(300, 840));
 		m_topLayer.setLayout(new BorderLayout());
-		m_info.setSize(new Dimension(300, 400));
+		m_topLayer.setBackground(Color.black);
+		m_info.setPreferredSize(new Dimension(300, 400));
 		m_info.setBackground(Color.gray);
+		m_info.setBorder(new EmptyBorder(10, 10, 10, 10) );
 		m_topLayer.add(dice.returnPanel(), BorderLayout.NORTH);
 		m_topLayer.add(m_info, BorderLayout.SOUTH);
 	}
