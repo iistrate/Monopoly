@@ -2,38 +2,43 @@
  * Contains Frame; Game Loop
  */
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class Game {
 	// member declarations
 	private boolean m_brunning;
+	private boolean m_bupdated;
+	private int m_imovement;
+	private int m_iplayerNr;
+	private int m_iturn;
+	
+	//layout
 	private JFrame m_frame;
 	private JPanel m_wrapper;
 	private JPanel m_board;
 	private JPanel m_topLayer;
 	private JPanel m_players;
+	private JPanel m_info;
 	private GridBagConstraints m_constraints;
+	
+	//Dice
 	private Dice dice;
-	private boolean m_bupdated;
-	private int m_imovement;
-	private int m_iplayerNr;
-	private int m_iturn;
 
-	// tile list created in world constructor
+	//tile list created in world constructor
 	World world = new World();
 
 	// constructor and initialization
-	Game(int w, int h, String name) {
+	public Game(int w, int h, String name) {
 		m_brunning = false;
 		try {
 			dice = new Dice();
@@ -41,21 +46,28 @@ public class Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		/* 
 		 * Layout init
 		 */
+		//frame
 		m_frame = new JFrame();
 		m_frame.setSize(w, h);
 		m_frame.setVisible(true);
 		m_frame.setName(name);
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//panels
 		m_wrapper = new JPanel();
 		m_board = new JPanel(new GridBagLayout());
 		m_topLayer = new JPanel();
+		m_info = new JPanel();
+		m_players = new JPanel();
+		
+		//constraints
 		m_constraints = new GridBagConstraints();
 		m_constraints.fill = GridBagConstraints.BOTH;
-		m_players = new JPanel();
-		m_players.setBackground(Color.red);
+		
 		/*
 		 * Member vars init
 		 */
@@ -66,8 +78,9 @@ public class Game {
 	}
 
 	// condition for game loop set to true
-	void init() {
+	public void init() {
 		m_brunning = true;
+		m_frame.setExtendedState(Frame.MAXIMIZED_BOTH); 
 		m_frame.add(m_wrapper);
 		m_wrapper.setBackground(Color.black);
 		m_board.setPreferredSize(new Dimension(900, 897));
@@ -75,13 +88,13 @@ public class Game {
 		m_board.setBackground(Color.black);
 		m_wrapper.add(m_board);
 		m_wrapper.add(m_topLayer);
-		m_topLayer.add(dice.returnPanel());
 		setuptiles();	
 		setupplayers();
 	}
 
 	// start game loop
-	void run() {
+	public void run() {
+		buildGUI();
 		do {
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
@@ -109,13 +122,13 @@ public class Game {
 	}
 
 	// stops game loop and clears resources
-	void quit() {
+	public void quit() {
 		m_frame.dispose();
 		m_brunning = false;
 	}
 
 	// add tiles from tilelist in world.java to current frame
-	void setuptiles() {
+	public void setuptiles() {
 		// temp tile object
 		Tile temptile = null;
 		// temp tilelist
@@ -138,7 +151,7 @@ public class Game {
 	}
 
 	// add players from player list in world.java to current frame
-	void setupplayers() {
+	public void setupplayers() {
 		// temp Player object
 		Player tempplayer = null;
 		// temp player list
@@ -167,5 +180,13 @@ public class Game {
 		setupplayers();
 		setuptiles();
 		m_frame.revalidate();		
+	}
+	public void buildGUI() {
+		m_topLayer.setPreferredSize(new Dimension(300, 890));
+		m_topLayer.setLayout(new BorderLayout());
+		m_info.setSize(new Dimension(300, 400));
+		m_info.setBackground(Color.gray);
+		m_topLayer.add(dice.returnPanel(), BorderLayout.NORTH);
+		m_topLayer.add(m_info, BorderLayout.SOUTH);
 	}
 }
