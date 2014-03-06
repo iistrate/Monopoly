@@ -21,13 +21,13 @@ public class Game {
 	private JPanel m_wrapper;
 	private JPanel m_board;
 	private JPanel m_topLayer;
+	private JPanel m_players;
 	private GridBagConstraints m_constraints;
 	private Dice dice;
 	private boolean m_bupdated;
 	private int m_imovement;
 	private int m_iplayerNr;
 	private int m_iturn;
-	private int m_iplayerTurn;
 
 	// tile list created in world constructor
 	World world = new World();
@@ -41,6 +41,9 @@ public class Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		/* 
+		 * Layout init
+		 */
 		m_frame = new JFrame();
 		m_frame.setSize(w, h);
 		m_frame.setVisible(true);
@@ -51,6 +54,11 @@ public class Game {
 		m_topLayer = new JPanel();
 		m_constraints = new GridBagConstraints();
 		m_constraints.fill = GridBagConstraints.BOTH;
+		m_players = new JPanel();
+		m_players.setBackground(Color.red);
+		/*
+		 * Member vars init
+		 */
 		m_bupdated = false;
 		m_imovement = 0;
 		m_iplayerNr = 0;
@@ -60,10 +68,6 @@ public class Game {
 	// condition for game loop set to true
 	void init() {
 		m_brunning = true;
-	}
-
-	// start game loop
-	void run() {
 		m_frame.add(m_wrapper);
 		m_wrapper.setBackground(Color.black);
 		m_board.setPreferredSize(new Dimension(900, 897));
@@ -72,12 +76,15 @@ public class Game {
 		m_wrapper.add(m_board);
 		m_wrapper.add(m_topLayer);
 		m_topLayer.add(dice.returnPanel());
+		setuptiles();	
 		setupplayers();
-		setuptiles();
+	}
+
+	// start game loop
+	void run() {
 		do {
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
-				// do movement would go here
 				m_imovement = dice.getRandom();
 				// if player isn't in jail or player is in jail and rolls
 				// doubles go ahead and move player
@@ -89,13 +96,7 @@ public class Game {
 				}
 				// when movement is done set false
 				dice.setIsUpdated(false);
-				// clear board
-				m_board.removeAll();
-				m_board.updateUI();
-				// redraw board
-				setupplayers();
-				setuptiles();
-				m_frame.revalidate();
+				drawComponents();
 				// increment player turn
 				if (m_iturn < m_iplayerNr) {
 					// increase turn
@@ -153,8 +154,18 @@ public class Game {
 			m_constraints.gridy = tempplayer.getY();
 			m_constraints.gridheight = 1;
 			m_constraints.gridwidth = 1;
+			//m_players.add(tempplayer.getPanel());
 			m_board.add(tempplayer.getPanel(), m_constraints);
 			m_board.validate();
 		}
+	}
+	public void drawComponents() {
+		// clear board
+		m_board.removeAll();
+		m_board.updateUI();
+		// redraw board
+		setupplayers();
+		setuptiles();
+		m_frame.revalidate();		
 	}
 }

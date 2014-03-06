@@ -14,8 +14,8 @@ public class Player extends GameObject {
 	}
 
 
-	protected void setM_binjail(boolean m_binjail) {
-		this.m_binjail = m_binjail;
+	protected void setM_binjail(boolean b) {
+		m_binjail = b;
 	}
 
 
@@ -24,8 +24,8 @@ public class Player extends GameObject {
 	}
 
 
-	protected void setM_iplayercash(int m_iplayercash) {
-		this.m_iplayermoney = this.m_iplayermoney + m_iplayercash;
+	protected void setM_iplayercash(int cash) {
+		m_iplayermoney = m_iplayermoney + cash;
 	}
 
 
