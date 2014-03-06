@@ -12,6 +12,7 @@ import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -22,6 +23,7 @@ public class Game {
 	private int m_imovement;
 	private int m_iplayerNr;
 	private int m_iturn;
+	private int m_igameTurn;
 	
 	//layout
 	private JFrame m_frame;
@@ -31,6 +33,10 @@ public class Game {
 	private JPanel m_players;
 	private JPanel m_info;
 	private GridBagConstraints m_constraints;
+	
+	//info
+	private JLabel m_topInfo;
+	private JLabel m_centerInfo;
 	
 	//Dice
 	private Dice dice;
@@ -65,6 +71,10 @@ public class Game {
 		m_info = new JPanel();
 		m_players = new JPanel();
 		
+		//labels
+		m_topInfo = new JLabel();
+		m_centerInfo = new JLabel();
+		
 		//constraints
 		m_constraints = new GridBagConstraints();
 		m_constraints.fill = GridBagConstraints.BOTH;
@@ -76,6 +86,7 @@ public class Game {
 		m_imovement = 0;
 		m_iplayerNr = 0;
 		m_iturn = 1;
+		m_igameTurn = 1;
 	}
 
 	// condition for game loop set to true
@@ -117,7 +128,9 @@ public class Game {
 					m_iturn++;
 				} else {
 					m_iturn = 1;
+					m_igameTurn++;
 				}
+				m_topInfo.setText("Game turn: " + m_igameTurn + " | Player " + m_iturn);
 			}
 		} while (m_brunning);
 	}
@@ -171,6 +184,9 @@ public class Game {
 			//m_players.add(tempplayer.getPanel());
 			m_board.add(tempplayer.getPanel(), m_constraints);
 			m_board.validate();
+			
+			//update player info
+			m_centerInfo.setText("Cash: " + tempplayer.getM_iplayercash());
 		}
 	}
 	public void drawComponents() {
@@ -186,10 +202,12 @@ public class Game {
 		m_topLayer.setPreferredSize(new Dimension(300, 840));
 		m_topLayer.setLayout(new BorderLayout());
 		m_topLayer.setBackground(Color.black);
-		m_info.setPreferredSize(new Dimension(300, 400));
+		m_info.setPreferredSize(new Dimension(300, 430));
 		m_info.setBackground(Color.gray);
 		m_info.setBorder(new EmptyBorder(10, 10, 10, 10) );
 		m_topLayer.add(dice.returnPanel(), BorderLayout.NORTH);
 		m_topLayer.add(m_info, BorderLayout.SOUTH);
+		m_info.add(m_topInfo);
+		m_info.add(m_centerInfo);
 	}
 }
