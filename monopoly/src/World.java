@@ -118,7 +118,8 @@ public class World {
 				currentsquare = 10 + tmpcnt;	
 			else if (plrPosX == i && plrPosY == 0) // 21 - 31
 				currentsquare = 21 + i;	
-			else if(plrPosX == i && plrPosY == 0) // 31 - 1
+			
+			else if(plrPosX == 10 && plrPosY == i) // 31 - 1
 				currentsquare = 31 + i;	
 			else
 				System.out.println("");
@@ -128,9 +129,12 @@ public class World {
 		// we know where we are, where are we going?
 		gotosquare = currentsquare + dice;
 		
+		System.out.print(currentsquare + " " + dice);
+		
 		if (gotosquare > 40){ // translate numbers above 40
 			gotosquare = gotosquare - 40;
 			tmpPlayer.setM_iplayercash(500); //$500 for passing go
+			System.out.print("LOOPY");
 		}
 		
 		//check if player planded on tax / jail / etc.
