@@ -24,8 +24,8 @@ public class Game {
 	private int m_iplayerNr;
 	private int m_iturn;
 	private int m_igameTurn;
-	
-	//layout
+
+	// layout
 	private JFrame m_frame;
 	private JPanel m_wrapper;
 	private JPanel m_board;
@@ -33,15 +33,15 @@ public class Game {
 	private JPanel m_players;
 	private JPanel m_info;
 	private GridBagConstraints m_constraints;
-	
-	//info
+
+	// info
 	private JLabel m_topInfo;
 	private JLabel m_centerInfo;
-	
-	//Dice
+
+	// Dice
 	private Dice dice;
 
-	//tile list created in world constructor
+	// tile list created in world constructor
 	World world = new World();
 
 	// constructor and initialization
@@ -53,32 +53,32 @@ public class Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		/* 
+
+		/*
 		 * Layout init
 		 */
-		//frame
+		// frame
 		m_frame = new JFrame();
 		m_frame.setSize(w, h);
 		m_frame.setVisible(true);
 		m_frame.setName(name);
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//panels
+
+		// panels
 		m_wrapper = new JPanel();
 		m_board = new JPanel(new GridBagLayout());
 		m_topLayer = new JPanel();
 		m_info = new JPanel();
 		m_players = new JPanel();
-		
-		//labels
+
+		// labels
 		m_topInfo = new JLabel();
 		m_centerInfo = new JLabel();
-		
-		//constraints
+
+		// constraints
 		m_constraints = new GridBagConstraints();
 		m_constraints.fill = GridBagConstraints.BOTH;
-		
+
 		/*
 		 * Member vars init
 		 */
@@ -92,7 +92,7 @@ public class Game {
 	// condition for game loop set to true
 	public void init() {
 		m_brunning = true;
-		m_frame.setExtendedState(Frame.MAXIMIZED_BOTH); 
+		m_frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		m_frame.add(m_wrapper);
 		m_wrapper.setBackground(Color.black);
 		m_board.setPreferredSize(new Dimension(900, 897));
@@ -100,7 +100,7 @@ public class Game {
 		m_board.setBackground(Color.black);
 		m_wrapper.add(m_board);
 		m_wrapper.add(m_topLayer);
-		setuptiles();	
+		setuptiles();
 		setupplayers();
 	}
 
@@ -116,7 +116,7 @@ public class Game {
 				if (!world.isplayerinjail(m_iturn)
 						|| world.isplayerinjail(m_iturn) && dice.isDouble())
 					world.movePlayer(m_imovement, m_iturn);
-				if (world.isplayerinjail(m_iturn) && dice.isDouble()){
+				if (world.isplayerinjail(m_iturn) && dice.isDouble()) {
 					world.playerleavejail(m_iturn);
 				}
 				// when movement is done set false
@@ -130,7 +130,8 @@ public class Game {
 					m_iturn = 1;
 					m_igameTurn++;
 				}
-				m_topInfo.setText("Game turn: " + m_igameTurn + " | Player " + m_iturn);
+				m_topInfo.setText("Game turn: " + m_igameTurn + " | Player "
+						+ m_iturn + " | Cash " + getcurrentplayer(m_iturn).getM_iplayercash());
 			}
 		} while (m_brunning);
 	}
@@ -139,6 +140,22 @@ public class Game {
 	public void quit() {
 		m_frame.dispose();
 		m_brunning = false;
+	}
+
+	public Player getcurrentplayer(int inCurrentplayer) {
+		inCurrentplayer = inCurrentplayer - 1;
+		// temp Player object
+		Player tempplayer = null;
+		// temp player list
+		ArrayList<Player> playerlist = new ArrayList<Player>();
+		playerlist = world.getPlayerlist();
+		for (int i = 0; i < playerlist.size(); i++) {
+			// get current tile from list
+			if (i == inCurrentplayer){
+			tempplayer = playerlist.get(i);
+			}
+		}
+		return tempplayer;
 	}
 
 	// add tiles from tilelist in world.java to current frame
@@ -181,14 +198,15 @@ public class Game {
 			m_constraints.gridy = tempplayer.getY();
 			m_constraints.gridheight = 1;
 			m_constraints.gridwidth = 1;
-			//m_players.add(tempplayer.getPanel());
+			// m_players.add(tempplayer.getPanel());
 			m_board.add(tempplayer.getPanel(), m_constraints);
 			m_board.validate();
-			
-			//update player info
-			m_centerInfo.setText("Cash: " + tempplayer.getM_iplayercash());
+
+			// update player info
+			//m_centerInfo.setText("Cash: " + tempplayer.getM_iplayercash());
 		}
 	}
+
 	public void drawComponents() {
 		// clear board
 		m_board.removeAll();
@@ -196,15 +214,16 @@ public class Game {
 		// redraw board
 		setupplayers();
 		setuptiles();
-		m_frame.revalidate();		
+		m_frame.revalidate();
 	}
+
 	public void buildGUI() {
 		m_topLayer.setPreferredSize(new Dimension(300, 840));
 		m_topLayer.setLayout(new BorderLayout());
 		m_topLayer.setBackground(Color.black);
 		m_info.setPreferredSize(new Dimension(300, 430));
 		m_info.setBackground(Color.gray);
-		m_info.setBorder(new EmptyBorder(10, 10, 10, 10) );
+		m_info.setBorder(new EmptyBorder(10, 10, 10, 10));
 		m_topLayer.add(dice.returnPanel(), BorderLayout.NORTH);
 		m_topLayer.add(m_info, BorderLayout.SOUTH);
 		m_info.add(m_topInfo);
