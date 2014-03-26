@@ -38,7 +38,7 @@ public class World {
 
 		// Player stuff
 		addplayer(38, 52, 10, 0, 0, 0);
-		// addplayer(38, 52, 9, 0, 38, 0 );
+		addplayer(38, 52, 9, 0, 38, 0);
 	}
 
 	// push a new player object on the playerlist
@@ -66,7 +66,7 @@ public class World {
 		World.tilelist = tilelist;
 	}
 
-	public boolean isplayerinjail(int inplayer){
+	public boolean isplayerinjail(int inplayer) {
 		inplayer = inplayer - 1;
 		Player tmpPlayer = null;
 		// get correct player from list
@@ -77,8 +77,8 @@ public class World {
 		}
 		return tmpPlayer.isM_binjail();
 	}
-	
-	public void playerleavejail(int inplayer){
+
+	public void playerleavejail(int inplayer) {
 		inplayer = inplayer - 1;
 		Player tmpPlayer = null;
 		// get correct player from list
@@ -86,12 +86,12 @@ public class World {
 			if (i == inplayer) {
 				tmpPlayer = playerlist.get(i);
 				tmpPlayer.setM_binjail(false);
-				playerlist.set(i, tmpPlayer);				
+				playerlist.set(i, tmpPlayer);
 			}
 		}
-		
+
 	}
-	
+
 	public void movePlayer(int dice, int playerToMove) {
 		int plr2move = playerToMove - 1;
 		int plrPosX;
@@ -99,7 +99,7 @@ public class World {
 		int currentsquare = 0;
 		int gotosquare = 0;
 		Player tmpPlayer = null;
-		
+
 		// get correct player from list
 		for (int i = 0; i < playerlist.size(); i++) {
 			if (i == plr2move) {
@@ -108,61 +108,57 @@ public class World {
 		}
 		plrPosX = tmpPlayer.getX();
 		plrPosY = tmpPlayer.getY();
-		
-		// translate X and Y to a square from 1 -> 40 starting at GO (10,10) ending at BoardWalk (10,9)
+
+		// translate X and Y to a square from 1 -> 40 starting at GO (10,10)
+		// ending at BoardWalk (10,9)
 		int tmpcnt = 1;
-		for (int i = 10; i >= 0; i--){
+		for (int i = 10; i >= 0; i--) {
 			if (plrPosX == i && plrPosY == 10) // 1 - 11
 				currentsquare = tmpcnt;
 			else if (plrPosX == 0 && plrPosY == i) // 11 - 21
-				currentsquare = 10 + tmpcnt;	
+				currentsquare = 10 + tmpcnt;
 			else if (plrPosX == i && plrPosY == 0) // 21 - 31
-				currentsquare = 21 + i;				
-			else if(plrPosX == 10 && plrPosY == i) // 31 - 1
-				currentsquare = 31 + i;	
+				currentsquare = 21 + i;
+			else if (plrPosX == 10 && plrPosY == i) // 31 - 1
+				currentsquare = 31 + i;
 			else
 				System.out.println("");
 			tmpcnt++;
 		}
-		
+
 		// we know where we are, where are we going?
-		gotosquare = currentsquare + dice;	
-		if (gotosquare > 40){ // translate numbers above 40
+		gotosquare = currentsquare + dice;
+		if (gotosquare > 40) { // translate numbers above 40
 			gotosquare = gotosquare - 40;
-			tmpPlayer.setM_iplayercash(500); //$500 for passing go
+			tmpPlayer.setM_iplayercash(500); // $500 for passing go
 		}
-		
-		//check if player planded on tax / jail / etc.
+
+		// check if player planded on tax / jail / etc.
 		if (gotosquare == 5) // -$200 income tax
 			tmpPlayer.setM_iplayercash(-200);
 		if (gotosquare == 39) // -$200 super tax
 			tmpPlayer.setM_iplayercash(-200);
-		if (gotosquare == 31){
+		if (gotosquare == 31) {
 			gotosquare = 11;
 			tmpPlayer.setM_binjail(true);
 		}
-		
-		
+
 		// go to needed square on board
-		if (gotosquare < 12){
+		if (gotosquare < 12) {
 			tmpPlayer.setX(11 - gotosquare);
 			tmpPlayer.setY(10);
-		}
-		else if (gotosquare < 22 && gotosquare > 11){
+		} else if (gotosquare < 22 && gotosquare > 11) {
 			tmpPlayer.setX(0);
 			tmpPlayer.setY(21 - gotosquare);
-		}
-		else if (gotosquare < 32 && gotosquare > 21){
+		} else if (gotosquare < 32 && gotosquare > 21) {
 			tmpPlayer.setX(gotosquare - 21);
 			tmpPlayer.setY(0);
-		}
-		else if (gotosquare < 41 && gotosquare > 31){
+		} else if (gotosquare < 41 && gotosquare > 31) {
 			tmpPlayer.setX(10);
 			tmpPlayer.setY(gotosquare - 31);
-		}
-		else 
+		} else
 			System.out.println("");
-		
+
 		// insert player back into playerlist
 		for (int i = 0; i < playerlist.size(); i++) {
 			if (i == plr2move) {
@@ -171,25 +167,46 @@ public class World {
 		}
 	}
 
-	// Load tilelist from tilelist.dat
-	@SuppressWarnings("unchecked")
-	public void load() throws IOException, ClassNotFoundException {
-		FileInputStream prein = new FileInputStream("tilelist.dat");
-		ObjectInputStream in = new ObjectInputStream(prein);
-		tilelist = (ArrayList<Tile>) in.readObject();
-		in.close();
-	}
+	public int getboardsqaure(int plrPosX, int plrPosY) {
+		int square = 0;
+		int tmpX = 781;
+		int tmpY = 781;
+		//bottom line top of carx y=757
+		//bottom row 1-11
+		if (plrPosY > 757)
+			square = 1;
+		// top
+		if (plrPosY < 140)
+			square = 31;
+		// left side
+	//	if (plrPosY > 140 && plrPosX < 116 && plrPosY < 781)
+	//		square = 11;
+	//	if (plrPosY < 781 && plrPosX > 781 && plrPosY > 140)
+	//		square = 41;
 
-	// save tile list to tilelist.dat
-	public void save() throws IOException {
-		FileOutputStream fos = new FileOutputStream("tilelist.dat");
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		try {
-			oos.writeObject(tilelist);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (plrPosY < 140 || plrPosY > 757) {
+			while (tmpX > 115) {
+				// bottom row
+				if (plrPosX < tmpX && plrPosY > 757)
+					square++;
+				//top
+				if (plrPosX < tmpX && plrPosY < 140)
+					square--;
+				tmpX = tmpX - 73;
+			}
 		}
-		oos.close();
+		
+	//	if(plrPosY > 140 && plrPosY < 781){
+	//		while (tmpY < 782 && tmpY > 140){
+	//			if (plrPosY < tmpY && plrPosX > 780)
+	//				square--;
+	//			if (plrPosY < tmpY && plrPosX < 140)
+	//				square++;
+	//			tmpY = tmpY - 73;
+	//		}
+	//	}
+		return square;
 	}
 
+	
 }
