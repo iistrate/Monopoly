@@ -12,29 +12,29 @@ public class World {
 
 	public World() { // all tiles need to be added here
 		// add four corners
-		addtile(115, 115, 0, 0, 0, 0); // free parking
-		addtile(115, 115, 10, 10, 781, 781); // go
-		addtile(115, 115, 10, 0, 0, 781); // jail
-		addtile(115, 115, 0, 10, 781, 0); // go to jail
+		addtile(115, 115, 0, 0, 0, 0, 21); // free parking
+		addtile(115, 115, 10, 10, 781, 781, 1); // go
+		addtile(115, 115, 0, 10, 0, 781, 11); // jail
+		addtile(115, 115, 10, 0, 781, 0, 31); // go to jail
 
 		// add top and bottom row of board tiles
 		int tempx = 121;
 		for (int i = 0; i < 9; i++) {
-			addtile(73, 115, i + 1, 0, tempx, 0); // top properties
-			addtile(73, 115, i + 1, 10, tempx, 781); // bottom properties
+			addtile(73, 115, i + 1, 0, tempx, 0, 21 + i); // top properties
+			addtile(73, 115, i + 1, 10, tempx, 781, 11 - i); // bottom properties
 			tempx = tempx + 73;
 		}
 
 		// add left and right side of tiles
 		int tempy = 119;
-		for (int i = 0; i < 9; i++) {
-			addtile(115, 73, 0, i + 1, 0, tempy); // left properties
-			addtile(115, 73, 10, i + 1, 780, tempy); // right properties
+		for (int i = 0; i < 10; i++) {
+			addtile(115, 73, 0, i + 1, 0, tempy, 21 - i); // left properties
+			addtile(115, 73, 10, i + 1, 780, tempy, 31 + i); // right properties
 			tempy = tempy + 73;
 		}
 
 		// add center tile
-		addtile(657, 622, 1, 1, 121, 119);
+		addtile(657, 622, 1, 1, 121, 119, 0);
 
 		// Player stuff
 		addplayer(38, 52, 10, 0, 0, 0);
@@ -47,8 +47,8 @@ public class World {
 	}
 
 	// push a new tile object on tilelist
-	public void addtile(int w, int h, int x, int y, int sX, int sY) {
-		tilelist.add(new Tile(w, h, x, y, sX, sY));
+	public void addtile(int w, int h, int x, int y, int sX, int sY, int inBoardSquare) {
+		tilelist.add(new Tile(w, h, x, y, sX, sY, inBoardSquare));
 	}
 
 	// return the entire playerlist, good if another class needs the array
@@ -90,6 +90,16 @@ public class World {
 			}
 		}
 
+	}
+	
+	public int getSquareinfo(int inSquare){
+		int tmpsquare = 0;
+		for (int i = 0; i < tilelist.size(); i++){
+			if (tilelist.get(i).getBoardSquare() == inSquare){
+				tmpsquare = tilelist.get(i).getBoardSquare();
+			}
+		}
+		return tmpsquare;
 	}
 
 	public void movePlayer(int dice, int playerToMove) {
@@ -167,6 +177,7 @@ public class World {
 		}
 	}
 
+	//the dimensions in this method aren't pixel perfect, need a little tweaking.
 	public int getboardsqaure(int plrPosX, int plrPosY) {
 		int square = 0;
 		int tmpX = 781;
@@ -179,10 +190,10 @@ public class World {
 		if (plrPosY < 140)
 			square = 31;
 		// left side
-	//	if (plrPosY > 140 && plrPosX < 116 && plrPosY < 781)
-	//		square = 11;
-	//	if (plrPosY < 781 && plrPosX > 781 && plrPosY > 140)
-	//		square = 41;
+		if (plrPosY > 140 && plrPosX < 116 && plrPosY < 781)
+			square = 11;
+		if (plrPosY < 781 && plrPosX > 781 && plrPosY > 140)
+			square = 41;
 
 		if (plrPosY < 140 || plrPosY > 757) {
 			while (tmpX > 115) {
@@ -196,15 +207,17 @@ public class World {
 			}
 		}
 		
-	//	if(plrPosY > 140 && plrPosY < 781){
-	//		while (tmpY < 782 && tmpY > 140){
-	//			if (plrPosY < tmpY && plrPosX > 780)
-	//				square--;
-	//			if (plrPosY < tmpY && plrPosX < 140)
-	//				square++;
-	//			tmpY = tmpY - 73;
-	//		}
-	//	}
+		if(plrPosY > 140 && plrPosY < 781){
+			while (tmpY < 782 && tmpY > 140){
+				//right side
+				if (plrPosY < tmpY && plrPosX > 780)
+					square--;
+				//left side
+				if (plrPosY < tmpY && plrPosX < 140)
+					square++;
+				tmpY = tmpY - 73;
+			}
+		}
 		return square;
 	}
 

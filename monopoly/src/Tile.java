@@ -7,8 +7,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 public class Tile extends GameObject {
-	Tile(int w, int h, int x, int y, int sX, int sY) {
+	private int squarePosition = 0;
+	private int squarePrice = 0;
+	private int squareRent = 0;
+	
+	Tile(int w, int h, int x, int y, int sX, int sY, int inBoardSqaure) {
 		//initialize game objects members
+		squarePosition = inBoardSqaure;
 		m_w = w;
 		m_h = h;
 		m_x = x;
@@ -24,5 +29,12 @@ public class Tile extends GameObject {
 		img.getIconHeight();
 		m_panel.add(label);
 		m_panel.setOpaque(false);
+	}
+	
+	public int getBoardSquare() {
+		return squarePosition;
+	}
+	public void setBoardSquare(int boardSquare) {
+		this.squarePosition = boardSquare;
 	}
 }

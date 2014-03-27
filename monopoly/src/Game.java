@@ -79,7 +79,7 @@ public class Game {
 			// I override only one method for presentation
 			public void mousePressed(MouseEvent e) {
 				JOptionPane.showMessageDialog(m_board,
-					    "Board Square fk#" + world.getboardsqaure(e.getX(), e.getY()) + " " + e.getX() + " " + e.getY(),
+					    "Board Square #" + world.getSquareinfo(world.getboardsqaure(e.getX(), e.getY())) + " " + e.getX() + " " + e.getY(),
 					    "Property Info",
 					    JOptionPane.PLAIN_MESSAGE);
 				//System.out.println(world.getboardsqaure(e.getX(), e.getY()));
