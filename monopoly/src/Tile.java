@@ -10,6 +10,8 @@ public class Tile extends GameObject {
 	private int squarePosition = 0;
 	private int squarePrice = 0;
 	private int squareRent = 0;
+	private String suqareGroup = "";
+	private String name = "";
 	
 	Tile(int w, int h, int x, int y, int sX, int sY, int inBoardSqaure) {
 		//initialize game objects members
@@ -36,5 +38,37 @@ public class Tile extends GameObject {
 	}
 	public void setBoardSquare(int boardSquare) {
 		this.squarePosition = boardSquare;
+	}
+
+	public int getSquarePrice() {
+		return squarePrice;
+	}
+
+	public void setSquarePrice(int squarePrice) {
+		this.squarePrice = squarePrice;
+	}
+
+	public int getSquareRent() {
+		return squareRent;
+	}
+
+	public void setSquareRent(int squareRent) {
+		this.squareRent = squareRent;
+	}
+
+	public String getSuqareGroup() {
+		return suqareGroup;
+	}
+
+	public void setSuqareGroup(String suqareGroup) {
+		this.suqareGroup = suqareGroup;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

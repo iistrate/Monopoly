@@ -1,9 +1,14 @@
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+
 
 public class World {
 	// arraylist for tile objects
@@ -17,30 +22,66 @@ public class World {
 		addtile(115, 115, 0, 10, 0, 781, 11); // jail
 		addtile(115, 115, 10, 0, 781, 0, 31); // go to jail
 
+		// add left and right side of tiles
+				int tempy = 119;
+				for (int i = 0; i < 10; i++) {
+					addtile(115, 73, 0, i + 1, 0, tempy, 21 - i); // left properties
+					addtile(115, 73, 10, i + 1, 780, tempy, 31 + i); // right properties
+					tempy = tempy + 73;
+				}
+				
 		// add top and bottom row of board tiles
 		int tempx = 121;
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 10; i++) {
 			addtile(73, 115, i + 1, 0, tempx, 0, 21 + i); // top properties
 			addtile(73, 115, i + 1, 10, tempx, 781, 11 - i); // bottom properties
 			tempx = tempx + 73;
 		}
-
-		// add left and right side of tiles
-		int tempy = 119;
-		for (int i = 0; i < 10; i++) {
-			addtile(115, 73, 0, i + 1, 0, tempy, 21 - i); // left properties
-			addtile(115, 73, 10, i + 1, 780, tempy, 31 + i); // right properties
-			tempy = tempy + 73;
-		}
-
+		
 		// add center tile
 		addtile(657, 622, 1, 1, 121, 119, 0);
+		
+		setupProperties(); // add property info to tiles.
 
 		// Player stuff
 		addplayer(38, 52, 10, 0, 0, 0);
 		addplayer(38, 52, 9, 0, 38, 0);
 	}
 
+	// load property information into tilelist.
+	public void setupProperties(){
+		try {
+			File file = new File("assets/properties.txt");
+			Scanner scanner = new Scanner(file);
+			
+			ArrayList<Tile> tmptilelist = new ArrayList<Tile>();
+			
+			while(scanner.hasNextLine()){
+				String line = scanner.nextLine();
+				String[] details = line.split(" ");
+				
+				String name = details[0];
+				int position = Integer.parseInt(details[1]);
+				int price = Integer.parseInt(details[2]);
+				int rent = Integer.parseInt(details[3]);
+				String group = details[4];
+				
+				for (int i = 0; i < tilelist.size(); i++){
+					Tile tmptile = tilelist.get(i);
+					if (tmptile.getBoardSquare() == position){
+						tmptile.setName(name);
+						tmptile.setSquarePrice(price);
+						tmptile.setSquareRent(rent);
+						tmptile.setSuqareGroup(group);
+						tilelist.set(i, tmptile);
+					}
+				}		
+			}			
+		}catch (FileNotFoundException e) {         
+            e.printStackTrace();
+        }		
+	}
+	
 	// push a new player object on the playerlist
 	public void addplayer(int w, int h, int x, int y, int sX, int sY) {
 		playerlist.add(new Player(w, h, x, y, sX, sY));
@@ -91,6 +132,19 @@ public class World {
 		}
 
 	}
+	
+	// return Tile object for property information
+	public Tile getTile(int inPosition){
+		Tile tmpTile = null;
+		for (int i = 0; i < tilelist.size(); i++){
+			if (tilelist.get(i).getBoardSquare() == inPosition){
+				tmpTile = tilelist.get(i);
+			}
+		}
+		return tmpTile; 
+	}
+	
+	
 	
 	public int getSquareinfo(int inSquare){
 		int tmpsquare = 0;
@@ -210,12 +264,12 @@ public class World {
 		if(plrPosY > 140 && plrPosY < 781){
 			while (tmpY < 782 && tmpY > 140){
 				//right side
-				if (plrPosY < tmpY && plrPosX > 780)
+				if (plrPosY < tmpY && plrPosX > 757)
 					square--;
 				//left side
 				if (plrPosY < tmpY && plrPosX < 140)
 					square++;
-				tmpY = tmpY - 73;
+				tmpY = tmpY - 67; //73
 			}
 		}
 		return square;
