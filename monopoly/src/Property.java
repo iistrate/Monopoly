@@ -1,14 +1,10 @@
 public class Property {
-	private final String m_sname;
-	private final int m_ivalue;
+	private String m_sname;
+	private int m_ivalue;
 	private boolean m_bavailable;
 	private int m_iplayer; 
 	
-	Property(String name, int value) {
-		m_sname = name;
-		m_ivalue = value;
-		m_bavailable = true;
-	}
+	Property() {}
 	
 	//setters
 	public void setAvailable(boolean b) {

@@ -12,29 +12,29 @@ public class World {
 
 	public World() { // all tiles need to be added here
 		// add four corners
-		addtile(115, 115, 0, 0, 0, 0); // free parking
-		addtile(115, 115, 10, 10, 781, 781); // go
-		addtile(115, 115, 10, 0, 0, 781); // jail
-		addtile(115, 115, 0, 10, 781, 0); // go to jail
+		addtile(115, 115, 0, 0, 0, 0, false); // free parking
+		addtile(115, 115, 10, 10, 781, 781, false); // go
+		addtile(115, 115, 10, 0, 0, 781, false); // jail
+		addtile(115, 115, 0, 10, 781, 0, false); // go to jail
 
 		// add top and bottom row of board tiles
 		int tempx = 121;
 		for (int i = 0; i < 9; i++) {
-			addtile(73, 115, i + 1, 0, tempx, 0); // top properties
-			addtile(73, 115, i + 1, 10, tempx, 781); // bottom properties
+			addtile(73, 115, i + 1, 0, tempx, 0, true); // top properties
+			addtile(73, 115, i + 1, 10, tempx, 781, true); // bottom properties
 			tempx = tempx + 73;
 		}
 
 		// add left and right side of tiles
 		int tempy = 119;
 		for (int i = 0; i < 9; i++) {
-			addtile(115, 73, 0, i + 1, 0, tempy); // left properties
-			addtile(115, 73, 10, i + 1, 780, tempy); // right properties
+			addtile(115, 73, 0, i + 1, 0, tempy, true); // left properties
+			addtile(115, 73, 10, i + 1, 780, tempy, true); // right properties
 			tempy = tempy + 73;
 		}
 
 		// add center tile
-		addtile(657, 622, 1, 1, 121, 119);
+		addtile(657, 622, 1, 1, 121, 119, false);
 
 		// Player stuff
 		addplayer(38, 52, 10, 0, 0, 0);
@@ -47,8 +47,8 @@ public class World {
 	}
 
 	// push a new tile object on tilelist
-	public void addtile(int w, int h, int x, int y, int sX, int sY) {
-		tilelist.add(new Tile(w, h, x, y, sX, sY));
+	public void addtile(int w, int h, int x, int y, int sX, int sY, boolean canBeBought) {
+		tilelist.add(new Tile(w, h, x, y, sX, sY, canBeBought));
 	}
 
 	// return the entire playerlist, good if another class needs the array
