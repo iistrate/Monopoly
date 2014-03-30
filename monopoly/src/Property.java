@@ -3,18 +3,7 @@ public class Property {
 	private int m_ivalue;
 	private boolean m_bavailable;
 	private int m_iplayer; 
-	
-	final int BROWN = 1;
-	final int LIGHT_BLUE = 2;
-	final int PURPLE = 3;
-	final int ORANGE = 4;
-	final int RED = 5;
-	final int YELLOW = 6;
-	final int GREEN = 7;
-	final int BLUE = 8;
-	final int UTILITIES = 9;
-	final int TRAIN_STATIONS = 10;
-	
+	private int m_igroup;
 	
 	public Property() {}
 	
@@ -30,6 +19,10 @@ public class Property {
 		m_sname = name;
 		return this;
 	}
+	public Property Group(int group) {
+		m_igroup = group;
+		return this;
+	}
 	
 	//setters
 	public void setAvailable(boolean b) {
@@ -37,6 +30,9 @@ public class Property {
 	}
 	public void setPlayer(int player) {
 		m_iplayer = player;
+	}
+	public void setGroup(int group) {
+		m_igroup = group;
 	}
 	
 	//getters
@@ -51,5 +47,8 @@ public class Property {
 	}
 	public int getPlayer() {
 		return m_iplayer;
+	}
+	public int getGroup() {
+		return m_igroup;
 	}
 }
