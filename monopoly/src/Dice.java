@@ -30,13 +30,6 @@ public class Dice{
 	
 	// ======== CONSTRUCTOR ================================
 	public Dice() throws InterruptedException {
-		// ----------- FRAME Initialization ------------
-//		d_frame = new JFrame("Dice");
-//		d_frame.setSize(600, 600);
-//		d_frame.setVisible(true);
-//		d_frame.setName("DICE");
-//		d_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		m_bdouble = false;
 		m_wrapper = new JPanel();
 		m_wrapper.setPreferredSize(new Dimension(189, 400));
@@ -90,12 +83,7 @@ public class Dice{
 		m_wrapper.add(diceLabel2,BorderLayout.CENTER);
 		m_wrapper.add(d_button,BorderLayout.SOUTH);
 		
-//		d_frame.setLayout(new BorderLayout());
-//		d_frame.add(diceLabel);
-//		d_frame.add(d_button,BorderLayout.SOUTH);
 		d_button.doClick();
-//		d_frame.pack();
-//		d_frame.setLocationRelativeTo(null);
 		//------------------------------------------	
 	}
 public JPanel returnPanel() {
@@ -113,18 +101,5 @@ public void setIsUpdated(boolean b) {
 public boolean isDouble() {
 	return m_bdouble;
 }
-// ======================== MAIN ======================================
-public static void main(String[] args) throws InterruptedException {
-	 javax.swing.SwingUtilities.invokeLater(new Runnable() {
-         public void run() {
-             try {
-				new Dice();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-         }
-     });
-	}//end main
-// =====================================================================
 
 }
