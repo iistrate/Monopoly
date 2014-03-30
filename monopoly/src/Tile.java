@@ -20,6 +20,12 @@ public class Tile extends GameObject {
 	final int UTILITIES = 9;
 	final int TRAIN_STATIONS = 10;
 	
+	public Property getProperty() {
+		return m_property;
+	}
+	
+	Tile() {}
+	
 	Tile(int w, int h, int x, int y, int sX, int sY, boolean canBeBought) {
 		//initialize game objects members
 		m_w = w;

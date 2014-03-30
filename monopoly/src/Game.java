@@ -32,6 +32,7 @@ public class Game {
 	private JPanel m_topLayer;
 	private JPanel m_players;
 	private JPanel m_info;
+	private JPanel m_propertyInfo;
 	private GridBagConstraints m_constraints;
 
 	// info
@@ -70,6 +71,7 @@ public class Game {
 		m_topLayer = new JPanel();
 		m_info = new JPanel();
 		m_players = new JPanel();
+		m_propertyInfo = new JPanel();
 
 		// labels
 		m_topInfo = new JLabel();
@@ -106,10 +108,19 @@ public class Game {
 
 	// start game loop
 	public void run() {
+		int p_x = 0;
+		int p_y = 0;
+		Tile playerTile = new Tile();
+	
 		buildGUI();
 		do {
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
+				p_x = world.getPlayerlist().get(m_iturn - 1).getX();
+				p_y = world.getPlayerlist().get(m_iturn - 1).getY();
+				playerTile = world.getTile(p_x, p_y);
+				m_propertyInfo.add(new JLabel("Name: " + playerTile.getProperty().getName()));
+				
 				m_imovement = dice.getRandom();
 				// if player isn't in jail or player is in jail and rolls
 				// doubles go ahead and move player
@@ -228,5 +239,6 @@ public class Game {
 		m_topLayer.add(m_info, BorderLayout.SOUTH);
 		m_info.add(m_topInfo);
 		m_info.add(m_centerInfo);
+		m_info.add(m_propertyInfo);
 	}
 }

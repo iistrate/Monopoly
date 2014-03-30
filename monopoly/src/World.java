@@ -191,5 +191,15 @@ public class World {
 		}
 		oos.close();
 	}
+	
+	public Tile getTile(int x, int y) {
+		Tile fTile = new Tile();
+		for (int i = 0; i < tilelist.size(); i++) {
+			if (tilelist.get(i).getX() == x && tilelist.get(i).getY() == y) {
+				fTile = tilelist.get(i);
+			}
+		}
+		return fTile;
+	}
 
 }
