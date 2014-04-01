@@ -21,14 +21,6 @@ public class World {
 		addtile(115, 115, 10, 0, 0, 781, false); // jail
 		addtile(115, 115, 0, 10, 781, 0, false); // go to jail
 
-		// add left and right side of tiles
-				int tempy = 119;
-				for (int i = 0; i < 10; i++) {
-					addtile(115, 73, 0, i + 1, 0, tempy, 21 - i); // left properties
-					addtile(115, 73, 10, i + 1, 780, tempy, 31 + i); // right properties
-					tempy = tempy + 73;
-				}
-				
 		// add top and bottom row of board tiles
 		int tempx = 121;
 
@@ -74,13 +66,13 @@ public class World {
 				
 				for (int i = 0; i < tilelist.size(); i++){
 					Tile tmptile = tilelist.get(i);
-					if (tmptile.getBoardSquare() == position){
+/*					if (tmptile.getBoardSquare() == position){
 						tmptile.setName(name);
 						tmptile.setSquarePrice(price);
 						tmptile.setSquareRent(rent);
 						tmptile.setSuqareGroup(group);
 						tilelist.set(i, tmptile);
-					}
+					}*/
 				}		
 			}			
 		}catch (FileNotFoundException e) {         
@@ -140,29 +132,7 @@ public class World {
 
 	}
 	
-	// return Tile object for property information
-	public Tile getTile(int inPosition){
-		Tile tmpTile = null;
-		for (int i = 0; i < tilelist.size(); i++){
-			if (tilelist.get(i).getBoardSquare() == inPosition){
-				tmpTile = tilelist.get(i);
-			}
-		}
-		return tmpTile; 
-	}
 	
-	
-	
-	public int getSquareinfo(int inSquare){
-		int tmpsquare = 0;
-		for (int i = 0; i < tilelist.size(); i++){
-			if (tilelist.get(i).getBoardSquare() == inSquare){
-				tmpsquare = tilelist.get(i).getBoardSquare();
-			}
-		}
-		return tmpsquare;
-	}
-
 	public void movePlayer(int dice, int playerToMove) {
 		int plr2move = playerToMove - 1;
 		int plrPosX;

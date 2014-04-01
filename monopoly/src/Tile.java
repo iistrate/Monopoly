@@ -172,42 +172,4 @@ public class Tile extends GameObject {
 		m_panel.setOpaque(false);
 	}
 	
-	public int getBoardSquare() {
-		return squarePosition;
-	}
-	public void setBoardSquare(int boardSquare) {
-		this.squarePosition = boardSquare;
-	}
-
-	public int getSquarePrice() {
-		return squarePrice;
-	}
-
-	public void setSquarePrice(int squarePrice) {
-		this.squarePrice = squarePrice;
-	}
-
-	public int getSquareRent() {
-		return squareRent;
-	}
-
-	public void setSquareRent(int squareRent) {
-		this.squareRent = squareRent;
-	}
-
-	public String getSuqareGroup() {
-		return suqareGroup;
-	}
-
-	public void setSuqareGroup(String suqareGroup) {
-		this.suqareGroup = suqareGroup;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 }

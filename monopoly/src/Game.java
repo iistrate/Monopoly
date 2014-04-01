@@ -79,12 +79,10 @@ public class Game {
 			@Override
 			// I override only one method for presentation
 			public void mousePressed(MouseEvent e) {
-				JOptionPane.showMessageDialog(m_board,
-					    
-						world.getTile(world.getboardsqaure(e.getX(), e.getY())).getName() + " Price $" + world.getTile(world.getboardsqaure(e.getX(), e.getY())).getSquarePrice(),
+				JOptionPane.showMessageDialog(m_board,	    
+						world.getboardsqaure(e.getX(), e.getY()),
 					    "Property Info",
 					    JOptionPane.PLAIN_MESSAGE);
-				//System.out.println(world.getboardsqaure(e.getX(), e.getY()));
 			}
 		});
 		m_topLayer = new JPanel();
