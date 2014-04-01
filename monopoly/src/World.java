@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
 public class World {
 	// arraylist for tile objects
 	private static ArrayList<Tile> tilelist = new ArrayList<Tile>();
