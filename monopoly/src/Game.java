@@ -9,10 +9,13 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -68,6 +71,22 @@ public class Game {
 		// panels
 		m_wrapper = new JPanel();
 		m_board = new JPanel(new GridBagLayout());
+		// add listener to board for property display.
+		m_frame.add(m_board);
+		m_board.addMouseListener(new MouseAdapter() {// empty implementation of
+														// all
+			// MouseListener`s methods
+			@Override
+			// I override only one method for presentation
+			public void mousePressed(MouseEvent e) {
+				JOptionPane.showMessageDialog(m_board,
+					    
+						world.getTile(world.getboardsqaure(e.getX(), e.getY())).getName() + " Price $" + world.getTile(world.getboardsqaure(e.getX(), e.getY())).getSquarePrice(),
+					    "Property Info",
+					    JOptionPane.PLAIN_MESSAGE);
+				//System.out.println(world.getboardsqaure(e.getX(), e.getY()));
+			}
+		});
 		m_topLayer = new JPanel();
 		m_info = new JPanel();
 		m_players = new JPanel();
@@ -89,6 +108,7 @@ public class Game {
 		m_iplayerNr = 0;
 		m_iturn = 1;
 		m_igameTurn = 1;
+
 	}
 
 	// condition for game loop set to true
@@ -113,7 +133,9 @@ public class Game {
 		Tile playerTile = new Tile();
 	
 		buildGUI();
+		int count = 0;
 		do {
+			count++;
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
 				p_x = world.getPlayerlist().get(m_iturn - 1).getX();
@@ -142,7 +164,8 @@ public class Game {
 					m_igameTurn++;
 				}
 				m_topInfo.setText("Game turn: " + m_igameTurn + " | Player "
-						+ m_iturn + " | Cash " + getcurrentplayer(m_iturn).getM_iplayercash());
+						+ m_iturn + " | Cash "
+						+ getcurrentplayer(m_iturn).getM_iplayercash());
 			}
 		} while (m_brunning);
 	}
@@ -162,8 +185,8 @@ public class Game {
 		playerlist = world.getPlayerlist();
 		for (int i = 0; i < playerlist.size(); i++) {
 			// get current tile from list
-			if (i == inCurrentplayer){
-			tempplayer = playerlist.get(i);
+			if (i == inCurrentplayer) {
+				tempplayer = playerlist.get(i);
 			}
 		}
 		return tempplayer;
@@ -209,12 +232,8 @@ public class Game {
 			m_constraints.gridy = tempplayer.getY();
 			m_constraints.gridheight = 1;
 			m_constraints.gridwidth = 1;
-			// m_players.add(tempplayer.getPanel());
 			m_board.add(tempplayer.getPanel(), m_constraints);
 			m_board.validate();
-
-			// update player info
-			//m_centerInfo.setText("Cash: " + tempplayer.getM_iplayercash());
 		}
 	}
 
