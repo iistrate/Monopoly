@@ -1,4 +1,4 @@
 teamAwesome
 ===========
 
-Team Awesome's page
+Monopoly game build with Java and Swing
