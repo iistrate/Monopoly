@@ -1,5 +1,5 @@
 /*
- so  * Magic
+ * Author: Ioan George Istrate
  */
 
 import java.awt.image.BufferedImage;
