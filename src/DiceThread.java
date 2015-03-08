@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 public class DiceThread extends Thread {
 	// -------------------------------
+	private boolean loadingDice;
 	private CustomImage d_image;
 	private  JLabel  diceLabel;
 	private JButton d_button;
@@ -20,8 +21,9 @@ public class DiceThread extends Thread {
 	private int d_Delay; // Delay between animation
 	//================================
 	
-	   DiceThread(JLabel jl, JButton jb,int j) {
+	   DiceThread(JLabel jl, JButton jb,int j, boolean ld) {
 		      super("Dice Thread");
+		      loadingDice = ld;
 		      diceLabel = jl;
 		      d_button = jb;
 		      d_Delay = 40;
@@ -29,11 +31,9 @@ public class DiceThread extends Thread {
 		      start(); // Start the thread
 		   }
  public void run() {
-	 // ======= Generating random number ===============
-	    //    System.out.println("IN dice thread = "+  d_random);
-	 // =================================================
-	        
-	 // Creating Animation ==============================      
+
+	        if (!loadingDice){
+	        // Creating Animation ==============================      
 	        int tmp = 0;
 			tmp = tmp +189;  // offset for image 
 			
@@ -75,6 +75,7 @@ public class DiceThread extends Thread {
 					e.printStackTrace();
 				}
 			}
+	        }
 			//  End of Sprite    //
 		//========= Displaying last result on DICE =======================
 	        switch(d_random){
