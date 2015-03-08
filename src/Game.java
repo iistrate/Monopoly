@@ -77,18 +77,6 @@ public class Game {
 		m_board = new JPanel(new GridBagLayout());
 		// add listener to board for property display.
 		m_frame.add(m_board);
-		m_board.addMouseListener(new MouseAdapter() {// empty implementation of
-														// all
-			// MouseListener`s methods
-			@Override
-			// I override only one method for presentation
-			public void mousePressed(MouseEvent e) {
-				JOptionPane.showMessageDialog(m_board,	    
-						world.getboardsqaure(e.getX(), e.getY()),
-					    "Property Info",
-					    JOptionPane.PLAIN_MESSAGE);
-			}
-		});
 		m_topLayer = new JPanel();
 		m_info = new JPanel();
 		m_players = new JPanel();
@@ -133,6 +121,8 @@ public class Game {
 		int p_x = 0;
 		int p_y = 0;
 		Tile playerTile = new Tile();
+		JLabel TileInfo = new JLabel("Property Name");
+		m_propertyInfo.add(TileInfo);
 	
 		buildGUI();
 		int count = 0;
@@ -143,8 +133,8 @@ public class Game {
 				p_x = world.getPlayerlist().get(m_iturn - 1).getX();
 				p_y = world.getPlayerlist().get(m_iturn - 1).getY();
 				playerTile = world.getTile(p_x, p_y);
-				m_propertyInfo.add(new JLabel("Name: " + playerTile.getProperty().getName()));
-				
+				String tileName = playerTile.getProperty().getName();
+				TileInfo.setText("Name: " + tileName);
 				m_imovement = dice.getRandom();
 				// if player isn't in jail or player is in jail and rolls
 				// doubles go ahead and move player

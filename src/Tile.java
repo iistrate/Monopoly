@@ -23,6 +23,7 @@ public class Tile extends GameObject {
 	final int BLUE = 8;
 	final int UTILITIES = 9;
 	final int TRAIN_STATIONS = 10;
+	final int NON_TRANSACTIONABLE = 11;
 	
 	public Property getProperty() {
 		return m_property;
@@ -41,9 +42,17 @@ public class Tile extends GameObject {
 		if (canBeBought) {
 			//top row
 			if (y == 0) {
-				if (x == 1) {
+				if (x == 0) {
+					m_property = new Property()
+					.Available(false).Name("Parking").Value(0).Group(NON_TRANSACTIONABLE);
+				}
+				else if (x == 1) {
 					m_property = new Property()
 					.Available(true).Name("Strand").Value(220).Group(RED);
+				}
+				else if (x == 2) {
+					m_property = new Property()
+					.Available(false).Name("Chance").Value(0).Group(NON_TRANSACTIONABLE);
 				}
 				else if (x == 3) {
 					m_property = new Property()
@@ -73,16 +82,28 @@ public class Tile extends GameObject {
 					m_property = new Property()
 					.Available(true).Name("Picadilly").Value(280).Group(YELLOW);
 				}
+				else if (x == 10) {
+					m_property = new Property()
+					.Available(false).Name("JAIL").Value(0).Group(NON_TRANSACTIONABLE);
+				}
 			} // end top row
 			//bottom row
 			else if (y == 10) {
-				if (x == 1) {
+				if (x == 0) {
+					m_property = new Property()
+					.Available(false).Name("JAIL").Value(0).Group(NON_TRANSACTIONABLE);
+				}
+				else if (x == 1) {
 					m_property = new Property()
 					.Available(true).Name("PentonVille Road").Value(120).Group(LIGHT_BLUE);
 				}
 				else if (x == 2) {
 					m_property = new Property()
 					.Available(true).Name("Euston Road").Value(100).Group(LIGHT_BLUE);
+				}
+				else if (x == 3) {
+					m_property = new Property()
+					.Available(false).Name("Chance").Value(0).Group(NON_TRANSACTIONABLE);
 				}
 				else if (x == 4) {
 					m_property = new Property()
@@ -92,24 +113,44 @@ public class Tile extends GameObject {
 					m_property = new Property()
 					.Available(true).Name("King Cross Station").Value(200).Group(TRAIN_STATIONS);
 				}
+				else if (x == 6) {
+					m_property = new Property()
+					.Available(false).Name("Income Tax").Value(200).Group(NON_TRANSACTIONABLE);
+				}
 				else if (x == 7) {
 					m_property = new Property()
 					.Available(true).Name("White Chaper Road").Value(60).Group(BROWN);
+				}
+				else if (x == 8) {
+					m_property = new Property()
+					.Available(false).Name("Community Chest").Value(0).Group(NON_TRANSACTIONABLE);
 				}
 				else if (x == 9) {
 					m_property = new Property()
 					.Available(true).Name("Old Kent Road").Value(60).Group(BROWN);
 				}
+				else if (x == 10) {
+					m_property = new Property()
+					.Available(false).Name("START").Value(200).Group(NON_TRANSACTIONABLE);
+				}
 			} // end bottom row
 			// left row
 			else if (x == 0) {
-				if (y == 1) {
+				if (y == 0) {
+					m_property = new Property()
+					.Available(false).Name("Jail").Value(0).Group(NON_TRANSACTIONABLE);							
+				}
+				else if (y == 1) {
 					m_property = new Property()
 					.Available(true).Name("Vine Street").Value(200).Group(ORANGE);					
 				}
 				else if (y == 2) {
 					m_property = new Property()
 					.Available(true).Name("Malborough Street").Value(180).Group(ORANGE);						
+				}
+				else if (y == 3) {
+					m_property = new Property()
+					.Available(false).Name("Community Chest").Value(0).Group(NON_TRANSACTIONABLE);						
 				}
 				else if (y == 4) {
 					m_property = new Property()
@@ -146,6 +187,10 @@ public class Tile extends GameObject {
 					m_property = new Property()
 					.Available(true).Name("Oxford Street").Value(300).Group(GREEN);						
 				}
+				else if (y == 3) {
+					m_property = new Property()
+					.Available(false).Name("Community Chest").Value(0).Group(NON_TRANSACTIONABLE);						
+				}
 				else if (y == 4) {
 					m_property = new Property()
 					.Available(true).Name("Bond Street").Value(320).Group(GREEN);						
@@ -154,9 +199,17 @@ public class Tile extends GameObject {
 					m_property = new Property()
 					.Available(true).Name("Liverpool St. Station").Value(200).Group(TRAIN_STATIONS);						
 				}
+				else if (y == 6) {
+					m_property = new Property()
+					.Available(false).Name("Chance").Value(0).Group(NON_TRANSACTIONABLE);						
+				}
 				else if (y == 7) {
 					m_property = new Property()
 					.Available(true).Name("Park Lane").Value(350).Group(BLUE);						
+				}
+				else if (y == 8) {
+					m_property = new Property()
+					.Available(false).Name("Super Tax").Value(100).Group(NON_TRANSACTIONABLE);						
 				}
 				else if (y == 9) {
 					m_property = new Property()
