@@ -21,6 +21,7 @@ public class Dice{
 	private JButton d_button;
 	public final static int d_Delay = 100;
 	Thread d_thread;
+	public boolean loadingDice = true;
 	
 	private int m_irandom;
 	boolean m_bdouble;
@@ -70,8 +71,9 @@ public class Dice{
 			    	  m_bdouble = false;
 			      }
 			      m_irandom = rnd1 + rnd2;
-				  DiceThread dice1 = new DiceThread(diceLabel1,d_button,rnd1);
-				  DiceThread dice2 = new DiceThread(diceLabel2,d_button,rnd2);
+				  DiceThread dice1 = new DiceThread(diceLabel1,d_button,rnd1, loadingDice);
+				  DiceThread dice2 = new DiceThread(diceLabel2,d_button,rnd2, loadingDice);
+				  loadingDice = false;
 				  m_bupdated = true;
 				  d_button.setEnabled(false);
 				  } 
