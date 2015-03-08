@@ -1,4 +1,8 @@
 /*
+ * Author: Jay Bingley, Ioan George Istrate
+ */
+
+/*
  * Contains Frame; Game Loop
  */
 

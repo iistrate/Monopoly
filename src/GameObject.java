@@ -1,4 +1,8 @@
 /*
+ * Author: Ioan George Istrate
+ */
+
+/*
  * Holds our game object members and interface
  */
 import javax.swing.JPanel;

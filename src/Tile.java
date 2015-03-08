@@ -1,4 +1,8 @@
 /*
+ * Author: Ioan George Istrate
+ */
+
+/*
  * Tile as a game object; loads image to label and label to panel
  */
 import java.awt.Dimension;

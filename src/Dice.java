@@ -1,5 +1,5 @@
 /*
- *  Wajih Ul Hassan
+ *  Author Wajih Ul Hassan, integrated/modified by Ioan Istrate
  *  2/24/2014
  *  Monopoly
  * 

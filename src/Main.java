@@ -1,4 +1,8 @@
 /*
+ * Author: Ioan George Istrate
+ */
+
+/*
  * Holds main function; Creates instance of Game, initializes and runs it
  */
 public class Main {

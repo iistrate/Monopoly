@@ -1,3 +1,7 @@
+/*
+ * Author: Ioan Istrate
+ */
+
 public class Property {
 	private String m_sname;
 	private int m_ivalue;

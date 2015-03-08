@@ -1,3 +1,7 @@
+/*
+ * Author: Jay Bingley, Ioan George Istrate
+ */
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
