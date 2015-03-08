@@ -25,13 +25,17 @@ import javax.swing.border.EmptyBorder;
 
 public class Game {
 	// member declarations
+	private int frameWidth;
+	private int frameHeight;
 	private boolean m_brunning;
 	private boolean m_bupdated;
 	private int m_imovement;
 	private int m_iplayerNr;
 	private int m_iturn;
 	private int m_igameTurn;
-
+	private int boardSizeW;
+	private int boardSizeH;
+	
 	// layout
 	private JFrame m_frame;
 	private JPanel m_wrapper;
@@ -54,6 +58,10 @@ public class Game {
 
 	// constructor and initialization
 	public Game(int w, int h, String name) {
+		frameHeight = h;
+		frameWidth = w;
+		boardSizeW = 640;
+		boardSizeH = 640;
 		m_brunning = false;
 		try {
 			dice = new Dice();
@@ -107,7 +115,7 @@ public class Game {
 		m_frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		m_frame.add(m_wrapper);
 		m_wrapper.setBackground(Color.black);
-		m_board.setPreferredSize(new Dimension(900, 897));
+		m_board.setPreferredSize(new Dimension(boardSizeW, boardSizeH));
 		m_board.setVisible(true);
 		m_board.setBackground(Color.black);
 		m_wrapper.add(m_board);
