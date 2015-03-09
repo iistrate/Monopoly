@@ -1,5 +1,5 @@
 /*
- *  Author Wajih Ul Hassan, integrated/modified by Ioan Istrate
+ *  Author Wajih Ul Hassan, integrated/modified by Ioan Istrate, Jay Bingley
  *  2/24/2014
  *  Monopoly
  * 
@@ -21,9 +21,11 @@ public class Dice{
 	private JButton d_button;
 	public final static int d_Delay = 100;
 	Thread d_thread;
-	public boolean loadingDice = true;
 	
+	public boolean loadingDice = true;
 	private int m_irandom;
+	private int m_height;
+	private int m_width;
 	boolean m_bdouble;
 	boolean m_bupdated;
 	
@@ -31,9 +33,10 @@ public class Dice{
 	
 	// ======== CONSTRUCTOR ================================
 	public Dice() throws InterruptedException {
+		m_height = m_width = 115;
 		m_bdouble = false;
 		m_wrapper = new JPanel();
-		m_wrapper.setPreferredSize(new Dimension(189, 400));
+		m_wrapper.setPreferredSize(new Dimension(m_width, (int)(m_height*2.4)));
 		//  ------ Creating Panel ---------------------- 
 		d_panel1 = new JPanel();
 		d_panel2 = new JPanel();
@@ -42,12 +45,12 @@ public class Dice{
 		m_wrapper.setBackground(Color.black);
 		// ----------------------------------------------
 		//creates image
-		d_image1 = new CustomImage("assets/diceSprite.png", 189, 199,0, 0);
-		d_image2 = new CustomImage("assets/diceSprite.png", 189, 199,0, 0);
+		d_image1 = new CustomImage("assets/diceSprite.png", m_width, m_height,0, 0);
+		d_image2 = new CustomImage("assets/diceSprite.png", m_width, m_height,0, 0);
 		//set panel size
 		
-		d_panel1.setPreferredSize(new Dimension(189, 199));
-		d_panel2.setPreferredSize(new Dimension(189, 199));
+		d_panel1.setPreferredSize(new Dimension(m_width, m_height));
+		d_panel2.setPreferredSize(new Dimension(m_width, m_height));
 		//adds image to panel
 		diceLabel1 = new JLabel(new ImageIcon(d_image1.getImage()));
 		diceLabel1.setHorizontalAlignment(JLabel.CENTER);

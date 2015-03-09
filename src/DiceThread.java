@@ -1,5 +1,5 @@
 /*
- *  Wajih Ul Hassan
+ *  Wajih Ul Hassan; Modified by Ioan Istrate
  *  2/24/2014
  *  Monopoly
  * 
@@ -19,6 +19,9 @@ public class DiceThread extends Thread {
 	private JButton d_button;
 	private int d_random;
 	private int d_Delay; // Delay between animation
+	private int m_height = 115;
+	private int m_width = 115;
+
 	//================================
 	
 	   DiceThread(JLabel jl, JButton jb,int j, boolean ld) {
@@ -35,12 +38,12 @@ public class DiceThread extends Thread {
 	        if (!loadingDice){
 	        // Creating Animation ==============================      
 	        int tmp = 0;
-			tmp = tmp +189;  // offset for image 
+			tmp = tmp + m_height;  // offset for image 
 			
 			// First Row of Sprite //
 			for(int i=0 ;i<4 ;i++){
-				d_image = new CustomImage("assets/diceSprite.png", 189, 199,tmp, 0);
-				tmp = tmp +189;
+				d_image = new CustomImage("assets/diceSprite.png", m_width, m_height,tmp, 0);
+				tmp = tmp + m_width;
 				diceLabel.setIcon(new ImageIcon(d_image.getImage()));
 				try {
 					Thread.sleep(d_Delay);
@@ -52,8 +55,8 @@ public class DiceThread extends Thread {
 			// Second Row of Sprite //
 			tmp =0;
 			for(int i=0 ;i<5 ;i++){
-				d_image = new CustomImage("assets/diceSprite.png", 189,199,tmp, 199);
-				tmp = tmp +189;
+				d_image = new CustomImage("assets/diceSprite.png", m_width,m_height, tmp, m_height);
+				tmp = tmp +m_height;
 				diceLabel.setIcon(new ImageIcon(d_image.getImage()));
 				try {
 					Thread.sleep(d_Delay);
@@ -65,8 +68,8 @@ public class DiceThread extends Thread {
 			// Third Row of Sprite //
 			tmp =0;
 			for(int i=0 ;i<5 ;i++){
-				d_image = new CustomImage("assets/diceSprite.png", 189, 199,tmp, 398);
-				tmp = tmp +189;
+				d_image = new CustomImage("assets/diceSprite.png", m_width, m_height,tmp, m_height*2);
+				tmp = tmp +m_height;
 				diceLabel.setIcon(new ImageIcon(d_image.getImage()));
 				try {
 					Thread.sleep(d_Delay);
@@ -80,22 +83,22 @@ public class DiceThread extends Thread {
 		//========= Displaying last result on DICE =======================
 	        switch(d_random){
             case 1:
-            	d_image = new CustomImage("assets/1.png", 189, 199,0, 0);
+            	d_image = new CustomImage("assets/1.png", m_width, m_height,0, 0);
                 break;
             case 2:
-            	d_image = new CustomImage("assets/2.png", 189, 199,0, 0);
+            	d_image = new CustomImage("assets/2.png", m_width, m_height,0, 0);
                 break;
             case 3:
-            	d_image = new CustomImage("assets/3.png", 189, 199,0, 0);
+            	d_image = new CustomImage("assets/3.png", m_width, m_height,0, 0);
                 break;
             case 4:
-            	d_image = new CustomImage("assets/4.png", 189, 199,0, 0);
+            	d_image = new CustomImage("assets/4.png", m_width, m_height,0, 0);
                 break;
             case 5:
-            	d_image = new CustomImage("assets/5.png", 189, 199,0, 0);
+            	d_image = new CustomImage("assets/5.png", m_width, m_height,0, 0);
                 break;
             case 6:
-            	d_image = new CustomImage("assets/6.png", 189, 199,0, 0);
+            	d_image = new CustomImage("assets/6.png", m_width, m_height,0, 0);
                 break;
         }
 	        diceLabel.setIcon(new ImageIcon(d_image.getImage()));

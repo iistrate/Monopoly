@@ -25,8 +25,8 @@ import javax.swing.border.EmptyBorder;
 
 public class Game {
 	// member declarations
-	private int frameWidth;
-	private int frameHeight;
+	private int m_frameWidth;
+	private int m_frameHeight;
 	private boolean m_brunning;
 	private boolean m_bupdated;
 	private int m_imovement;
@@ -58,8 +58,8 @@ public class Game {
 
 	// constructor and initialization
 	public Game(int w, int h, String name) {
-		frameHeight = h;
-		frameWidth = w;
+		m_frameHeight = h;
+		m_frameWidth = w;
 		boardSizeW = 640;
 		boardSizeH = 640;
 		m_brunning = false;
@@ -248,10 +248,10 @@ public class Game {
 	}
 
 	public void buildGUI() {
-		m_topLayer.setPreferredSize(new Dimension(300, 840));
+		m_topLayer.setPreferredSize(new Dimension((int) (0.25 * m_frameWidth), m_frameHeight));
 		m_topLayer.setLayout(new BorderLayout());
 		m_topLayer.setBackground(Color.black);
-		m_info.setPreferredSize(new Dimension(300, 430));
+		m_info.setPreferredSize(new Dimension((int) (0.25 * m_frameWidth), (int) (0.5 * m_frameHeight)));
 		m_info.setBackground(Color.gray);
 		m_info.setBorder(new EmptyBorder(10, 10, 10, 10));
 		m_topLayer.add(dice.returnPanel(), BorderLayout.NORTH);
