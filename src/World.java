@@ -18,9 +18,10 @@ public class World {
 	private static ArrayList<Tile> tilelist = new ArrayList<Tile>();
 	private static ArrayList<Player> playerlist = new ArrayList<Player>();
 	//dimensions
-	int bigTileSizeW = 85, bigTileSizeH = 84;
-	int smallTileW = 52, smallTileH = 52;
-	int centerTileWidth = 470;
+	int bigTileSizeW = 85, bigTileSizeH =83;
+	int smallTileSideW = 85, smallTileSideH = 52;
+	int smallTileTopW = 52, smallTileTopH = 83;
+	int centerTileWidth = 468;
 	int centerTileHeight = 435; /* we're missing 35 pixels :) */
 	//
 	int imageSizeW = 640;
@@ -34,24 +35,24 @@ public class World {
 		// add four corners		
 		addtile(bigTileSizeW, bigTileSizeH, 0, 0, 0, 0, false); // free parking
 		addtile(bigTileSizeW, bigTileSizeH, 10, 10, spriteRightPos, spriteTopPos, false); // go
-		addtile(bigTileSizeW, bigTileSizeH, 10, 0, 0, spriteTopPos, false); // jail
-		addtile(bigTileSizeW, bigTileSizeH, 0, 10, spriteRightPos, 0, false); // go to jail
+		addtile(bigTileSizeW, bigTileSizeH, 10, 0, spriteRightPos, 0, false); // jail
+		addtile(bigTileSizeW, bigTileSizeH, 0, 10, 0, spriteTopPos, false); // go to jail
 
 		// add top and bottom row of board tiles
 		int tempx = bigTileSizeW;
 
 		for (int i = 0; i < 9; i++) {
-			addtile(smallTileW, bigTileSizeH, i + 1, 0, tempx, 0, true); // top properties
-			addtile(smallTileW, bigTileSizeH, i + 1, 10, tempx, spriteTopPos, true); // bottom properties
-			tempx = tempx + smallTileW;
+			addtile(smallTileTopW, smallTileTopH, i + 1, 0, tempx, 0, true); // top properties
+			addtile(smallTileTopW, smallTileTopH, i + 1, 10, tempx, spriteTopPos, true); // bottom properties
+			tempx = tempx + smallTileTopW;
 		}
 
 		// add left and right side of tiles
 		int tempy = bigTileSizeH;
 		for (int i = 0; i < 9; i++) {
-			addtile(bigTileSizeW, smallTileH, 0, i + 1, 0, tempy, true); // left properties
-			addtile(bigTileSizeW, smallTileH, 10, i + 1, spriteRightPos, tempy, true); // right properties
-			tempy = tempy + smallTileH;
+			addtile(smallTileSideW, smallTileSideH, 0, i + 1, 0, tempy, true); // left properties
+			addtile(smallTileSideW, smallTileSideH, 10, i + 1, spriteRightPos, tempy, true); // right properties
+			tempy = tempy + smallTileSideH;
 		}
 
 		// add center tile
@@ -59,42 +60,8 @@ public class World {
 
 		// Player stuff
 		addplayer(38, 52, 10, 0, 0, 0);
-		addplayer(38, 52, 9, 0, 38, 0);
+		addplayer(38, 52, 10, 0, 38, 0);
 	}
-
-	// load property information into tilelist.
-//	public void setupProperties(){
-//		try {
-//			File file = new File("assets/properties.txt");
-//			Scanner scanner = new Scanner(file);
-//			
-//			ArrayList<Tile> tmptilelist = new ArrayList<Tile>();
-//			
-//			while(scanner.hasNextLine()){
-//				String line = scanner.nextLine();
-//				String[] details = line.split(" ");
-//				
-//				String name = details[0];
-//				int position = Integer.parseInt(details[1]);
-//				int price = Integer.parseInt(details[2]);
-//				int rent = Integer.parseInt(details[3]);
-//				String group = details[4];
-//				
-//				for (int i = 0; i < tilelist.size(); i++){
-//					Tile tmptile = tilelist.get(i);
-///*					if (tmptile.getBoardSquare() == position){
-//						tmptile.setName(name);
-//						tmptile.setSquarePrice(price);
-//						tmptile.setSquareRent(rent);
-//						tmptile.setSuqareGroup(group);
-//						tilelist.set(i, tmptile);
-//					}*/
-//				}		
-//			}			
-//		}catch (FileNotFoundException e) {         
-//            e.printStackTrace();
-//        }		
-//	}
 	
 	// push a new player object on the playerlist
 	public void addplayer(int w, int h, int x, int y, int sX, int sY) {
@@ -104,7 +71,6 @@ public class World {
 	// push a new tile object on tilelist
 	public void addtile(int w, int h, int x, int y, int sX, int sY, boolean canBeBought) {
 		tilelist.add(new Tile(w, h, x, y, sX, sY, canBeBought));
-
 	}
 
 	// return the entire playerlist, good if another class needs the array
@@ -237,50 +203,6 @@ public class World {
 			}
 		}
 	}
-
-//	//the dimensions in this method aren't pixel perfect, need a little tweaking.
-//	public int getboardsqaure(int plrPosX, int plrPosY) {
-//		int square = 0;
-//		int tmpX = spriteRightPos;
-//		int tmpY = spriteTopPos;
-//		//bottom line top of carx y=757
-//		//bottom row 1-11
-//		if (plrPosY > 757)
-//			square = 1;
-//		// top
-//		if (plrPosY < 140)
-//			square = 31;
-//		// left side
-//		if (plrPosY > 140 && plrPosX < 116 && plrPosY < 781)
-//			square = 11;
-//		if (plrPosY < 781 && plrPosX > 781 && plrPosY > 140)
-//			square = 41;
-//
-//		if (plrPosY < 140 || plrPosY > 757) {
-//			while (tmpX > 115) {
-//				// bottom row
-//				if (plrPosX < tmpX && plrPosY > 757)
-//					square++;
-//				//top
-//				if (plrPosX < tmpX && plrPosY < 140)
-//					square--;
-//				tmpX = tmpX - smallTileW;
-//			}
-//		}
-//		
-//		if(plrPosY > 140 && plrPosY < 781){
-//			while (tmpY < 782 && tmpY > 140){
-//				//right side
-//				if (plrPosY < tmpY && plrPosX > 757)
-//					square--;
-//				//left side
-//				if (plrPosY < tmpY && plrPosX < 140)
-//					square++;
-//				tmpY = tmpY - 67; //smallTileW
-//			}
-//		}
-//		return square;
-//	}
 	
 	public Tile getTile(int x, int y) {
 		Tile fTile = new Tile();
