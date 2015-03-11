@@ -148,6 +148,20 @@ public class World {
 
 	}
 	
+	public void printPlayerposition(){
+		
+	}
+	
+	// Puts all players on go
+	public void resetPlayers(){
+		Player tmpPlayer = null;
+		for (int i = 0; i < playerlist.size(); i++) {
+			tmpPlayer = playerlist.get(i);
+			tmpPlayer.setX(10);
+			tmpPlayer.setY(10);
+		}
+	}
+	
 	
 	public void movePlayer(int dice, int playerToMove) {
 		int plr2move = playerToMove - 1;
@@ -190,7 +204,7 @@ public class World {
 			tmpPlayer.setM_iplayercash(500); // $500 for passing go
 		}
 
-		// check if player planded on tax / jail / etc.
+		// check if player landed on tax / jail / etc.
 		if (gotosquare == 5) // -$200 income tax
 			tmpPlayer.setM_iplayercash(-200);
 		if (gotosquare == 39) // -$200 super tax
