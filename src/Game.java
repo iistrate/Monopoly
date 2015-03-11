@@ -246,13 +246,11 @@ public class Game {
 	}
 
 	public void drawComponents() {
-		// clear board
-		m_board.removeAll();
-		m_board.updateUI();
 		// redraw board
 		setupplayers();
 		setuptiles();
 		m_frame.revalidate();
+		m_board.updateUI();
 	}
 
 	public void buildGUI() {
