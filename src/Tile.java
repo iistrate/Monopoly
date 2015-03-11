@@ -39,7 +39,6 @@ public class Tile extends GameObject {
 		m_x = x;
 		m_y = y;
 		m_panel = new JPanel();
-		if (canBeBought) {
 			//top row
 			if (y == 0) {
 				if (x == 0) {
@@ -216,7 +215,6 @@ public class Tile extends GameObject {
 					.Available(true).Name("MayFair").Value(400).Group(BLUE);						
 				}		
 			}//end right row
-		}
 		//creates image
 		m_image = new CustomImage("assets/sprites-board.jpg", w, h, sX, sY);
 		//set panel size

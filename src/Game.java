@@ -136,28 +136,21 @@ public class Game {
 		m_propertyInfo.add(TileInfo);
 		playerTile = world.getTile(p_x, p_y);
 		buildGUI();
-		int count = 0;
 		do {
-			count++;
 			m_bupdated = dice.isUpdated();
 			if (m_bupdated) {
+				drawComponents();
 				p_x = world.getPlayerlist().get(m_iturn - 1).getX();
 				p_y = world.getPlayerlist().get(m_iturn - 1).getY();
-				playerTile = world.getTile(p_x, p_y);
-				String tileName = playerTile.getProperty().getName();
-				TileInfo.setText("Name: " + tileName);
 				m_imovement = dice.getRandom();
 				// if player isn't in jail or player is in jail and rolls
 				// doubles go ahead and move player
-				if (!world.isplayerinjail(m_iturn)
-						|| world.isplayerinjail(m_iturn) && dice.isDouble())
+				if (!world.isplayerinjail(m_iturn) || (world.isplayerinjail(m_iturn) && dice.isDouble())) {
 					world.movePlayer(m_imovement, m_iturn);
+				}
 				if (world.isplayerinjail(m_iturn) && dice.isDouble()) {
 					world.playerleavejail(m_iturn);
 				}
-				// when movement is done set false
-				dice.setIsUpdated(false);
-				drawComponents();
 				// increment player turn
 				if (m_iturn < m_iplayerNr) {
 					// increase turn
@@ -169,6 +162,11 @@ public class Game {
 				m_topInfo.setText("<html>Game turn : " + m_igameTurn + " <br> Player : "
 						+ m_iturn + " <br> Cash : "
 						+ getcurrentplayer(m_iturn).getM_iplayercash() + "<br></html>");
+				playerTile = world.getTile(p_x, p_y);
+				String tileName = playerTile.getProperty().getName();
+				TileInfo.setText("Name: " + tileName);				
+				// when movement is done set false
+				dice.setIsUpdated(false);
 			}
 		} while (m_brunning);
 	}
