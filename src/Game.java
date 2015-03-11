@@ -166,9 +166,9 @@ public class Game {
 					m_iturn = 1;
 					m_igameTurn++;
 				}
-				m_topInfo.setText("Game turn: " + m_igameTurn + " | Player "
-						+ m_iturn + " | Cash "
-						+ getcurrentplayer(m_iturn).getM_iplayercash());
+				m_topInfo.setText("<html>Game turn : " + m_igameTurn + " <br> Player : "
+						+ m_iturn + " <br> Cash : "
+						+ getcurrentplayer(m_iturn).getM_iplayercash() + "<br></html>");
 			}
 		} while (m_brunning);
 	}
