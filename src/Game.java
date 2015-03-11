@@ -134,7 +134,7 @@ public class Game {
 		Tile playerTile = new Tile();
 		JLabel TileInfo = new JLabel("Property Name");
 		m_propertyInfo.add(TileInfo);
-	
+		playerTile = world.getTile(p_x, p_y);
 		buildGUI();
 		int count = 0;
 		do {
@@ -223,6 +223,8 @@ public class Game {
 		//ugly way to help fix the dice roll and initial movement of players
 		if (m_firstGameloop < 2){
 			world.resetPlayers();
+			m_iturn = 2;
+			m_igameTurn = 0;
 			m_firstGameloop++;
 		}
 		// temp Player object
