@@ -20,7 +20,7 @@ public class World {
 	//dimensions
 	int bigTileSizeW = 85, bigTileSizeH =83;
 	int smallTileSideW = 85, smallTileSideH = 52;
-	int smallTileTopW = 52, smallTileTopH = 83;
+	int smallTileTopW = 52, smallTileTopH = 85;
 	int centerTileWidth = 468;
 	int centerTileHeight = 435; /* we're missing 35 pixels :) */
 	//

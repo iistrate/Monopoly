@@ -63,8 +63,8 @@ public class Game {
 	public Game(int w, int h, String name) {
 		m_frameHeight = h;
 		m_frameWidth = w;
-		boardSizeW = 640;
-		boardSizeH = 640;
+		boardSizeW = (int) (0.8 * w);
+		boardSizeH = h;
 		m_brunning = false;
 		try {
 			dice = new Dice();

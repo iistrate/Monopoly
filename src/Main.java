@@ -8,7 +8,7 @@
 public class Main {
 	public static void main(String[] args) {
 		int width = 800;
-		int height = 600;
+		int height = 640;
 	
 		//instance of game
 		Game theGame = new Game(width, height, "Monopoly");
