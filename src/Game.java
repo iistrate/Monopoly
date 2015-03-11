@@ -49,6 +49,9 @@ public class Game {
 	// info
 	private JLabel m_topInfo;
 	private JLabel m_centerInfo;
+	
+	//variable for setting players on go
+	private int m_firstGameloop = 0;
 
 	// Dice
 	private Dice dice;
@@ -217,6 +220,11 @@ public class Game {
 
 	// add players from player list in world.java to current frame
 	public void setupplayers() {
+		//ugly way to help fix the dice roll and initial movement of players
+		if (m_firstGameloop < 2){
+			world.resetPlayers();
+			m_firstGameloop++;
+		}
 		// temp Player object
 		Player tempplayer = null;
 		// temp player list
